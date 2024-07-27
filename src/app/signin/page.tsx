@@ -7,7 +7,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import Link from "next/link";
 import { googleAuthProvider } from "../firebase/firebase";
 
- const SignIn = () => {
+ const Signin = () => {
   const [email, setEmail] = useState("");
   
   const [password, setPassword] = useState("");
@@ -34,6 +34,9 @@ import { googleAuthProvider } from "../firebase/firebase";
 
         const userDoc = await getDoc(doc(firestore, "user", user.uid));
         if (!userDoc.exists()) {
+
+          // save user data to firestre after email verification
+
           await setDoc(doc(firestore, "user", user.uid), {
             firstName,
             lastName,
@@ -169,4 +172,4 @@ import { googleAuthProvider } from "../firebase/firebase";
   );
 }
 
-export default SignIn;
+export default Signin;
