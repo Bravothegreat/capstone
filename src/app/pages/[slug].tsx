@@ -1,0 +1,33 @@
+// "use client"
+
+import { GetServerSideProps } from "next";
+import { firestore } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+
+export const getServerSiseProps: GetServerSideProps = async (context) => {
+  const { slug } = context.params as { slug: string };
+  const docRef = doc(firestore, "urls", slug);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return {
+      redirect: {
+        destination: docSnap.data().originalUrl,
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      notFound: true
+      // redirect: {
+      //   destination: "/",
+      //   permanent: false,
+      // },
+    };
+  }
+};
+
+export default function Redirect() {
+  return <div>Redirecting...</div>;
+}
