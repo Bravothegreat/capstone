@@ -5,7 +5,7 @@ import { firestore } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 
-export const getServerSiseProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = context.params as { slug: string };
   const docRef = doc(firestore, "urls", slug);
   const docSnap = await getDoc(docRef);

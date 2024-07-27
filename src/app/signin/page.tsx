@@ -1,14 +1,15 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import  { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword,  signInWithPopup } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Link from "next/link";
 import { googleAuthProvider } from "../firebase/firebase";
 
-export default function signin() {
+ const SignIn = () => {
   const [email, setEmail] = useState("");
+  
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -167,3 +168,5 @@ export default function signin() {
     </>
   );
 }
+
+export default SignIn;

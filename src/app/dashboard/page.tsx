@@ -2,14 +2,14 @@
 
 import UrlShortener from "../component/urlshortener";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import type { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
-export default function dashboard() {
+export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const [username, setUserName] = useState<string | null>(null);
