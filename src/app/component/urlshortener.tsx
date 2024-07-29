@@ -85,7 +85,6 @@
 
 // }
 
-
 "use client"
 
 import { useState } from "react";
@@ -101,6 +100,7 @@ export default function UrlShortener() {
 
   const handleShorten = async () => {
     if (url.trim()) {
+      // Generate slug from custom slug or nanoid
       const slug = customSlug.trim() || nanoid(6);
       const docRef = doc(firestore, "urls", slug);
       const docSnap = await getDoc(docRef);
@@ -108,11 +108,14 @@ export default function UrlShortener() {
       if (docSnap.exists()) {
         alert("Slug already in use. Please choose another.");
       } else {
+        // Store the original URL with the slug as the document ID
         await setDoc(docRef, {
           originalUrl: url,
           slug: slug,
         });
+        // Set the short URL
         setShortUrl(`${window.location.origin}/${slug}`);
+        // Reset input fields
         setUrl("");
         setCustomSlug("");
       }
@@ -130,7 +133,7 @@ export default function UrlShortener() {
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="Enter URL"
+            placeholder=""
             className="input-group_input"
           />
           <label className="input-group_label">Enter URL</label>
@@ -141,7 +144,7 @@ export default function UrlShortener() {
             type="text"
             value={customSlug}
             onChange={(e) => setCustomSlug(e.target.value)}
-            placeholder="Custom Slug (optional)"
+            placeholder=""
             className="input-group_input"
           />
           <label className="input-group_label">Custom Slug</label>
