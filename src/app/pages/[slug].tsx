@@ -32,19 +32,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-
-
 };
 
-export default function Redirect() {
-  return <div>Redirecting...</div>;
-}
-
-// pages/api/shorten.js
-// import { firestore } from '../firebase/firebase'; // Ensure this path is correct
-// import { doc, getDoc, setDoc } from 'firebase/firestore';
-// import { nanoid } from 'nanoid';
-
-// export default async function handler(req, res) {
-
+// export default function Redirect() {
+//   return <div>Redirecting...</div>;
 // }
+
+
