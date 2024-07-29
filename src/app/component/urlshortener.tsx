@@ -34,7 +34,7 @@ export default function UrlShortener () {
   return (
     <>
     <div>
-      <h1>URL Shortener</h1>
+      <h1> Shortener</h1>
       
       <div className="shortner-div" >
          
@@ -47,7 +47,7 @@ export default function UrlShortener () {
           className="input-group_input"
         />
         <label className="input-group_label">
-           Enter URL
+           Enter URL 
            </label>
       </div>
 
