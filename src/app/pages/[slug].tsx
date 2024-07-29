@@ -33,55 +33,43 @@
 // }
 
 
-// pages/[slug].js
-import { firestore } from "../firebase/firebase"; // Ensure Firebase is properly configured
-import { doc, getDoc } from "firebase/firestore";
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+// pages/api/shorten.js
+import { firestore } from '../firebase/firebase'; // Ensure this path is correct
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { nanoid } from 'nanoid';
 
-const RedirectPage = ({ originalUrl }) => {
-  const router = useRouter();
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { url, customSlug } = req.body;
 
-  useEffect(() => {
-    if (originalUrl) {
-      // Client-side redirection as a fallback
-      router.replace(originalUrl);
+    if (!url) {
+      return res.status(400).json({ error: 'URL is required' });
     }
-  }, [originalUrl, router]);
 
-  return null; // Optionally, you can return a loading spinner or similar UI
-};
+    const slug = customSlug ? customSlug.trim() : nanoid(6);
+    const docRef = doc(firestore, 'urls', slug);
 
-export async function getServerSideProps(context) {
-  const { slug } = context.params;
+    try {
+      const docSnap = await getDoc(docRef);
 
-  try {
-    // Access Firestore document based on the slug
-    const docRef = doc(firestore, "urls", slug);
-    const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return res.status(400).json({ error: 'Slug already in use. Please choose another.' });
+      }
 
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      const { originalUrl } = data;
+      await setDoc(docRef, {
+        originalUrl: url,
+        slug: slug,
+      });
 
-      // Redirect to the original URL
-      return {
-        redirect: {
-          destination: originalUrl,
-          permanent: false, // Indicates the redirect is not permanent
-        },
-      };
-    } else {
-      return {
-        notFound: true, // Show 404 page if the slug does not exist
-      };
+      const shortUrl = `${req.headers.origin}/${slug}`;
+
+      return res.status(200).json({ shortUrl });
+    } catch (error) {
+      console.error('Error creating shortened URL:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-  } catch (error) {
-    console.error("Error fetching document from Firestore:", error);
-    return {
-      notFound: true, // Show 404 page in case of error
-    };
+  } else {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 }
-
-export default RedirectPage;

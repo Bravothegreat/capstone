@@ -88,10 +88,11 @@
 "use client"
 
 import { useState } from "react";
-import { firestore } from "../firebase/firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { nanoid } from "nanoid";
+// import { firestore } from "../firebase/firebase";
+// import { doc, setDoc, getDoc } from "firebase/firestore";
+// import { nanoid } from "nanoid";
 import QRCode from "qrcode.react";
+import axios from "axios";
 
 export default function UrlShortener() {
   const [url, setUrl] = useState("");
@@ -100,24 +101,14 @@ export default function UrlShortener() {
 
   const handleShorten = async () => {
     if (url.trim()) {
-      // Generate slug from custom slug or nanoid
-      const slug = customSlug.trim() || nanoid(6);
-      const docRef = doc(firestore, "urls", slug);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        alert("Slug already in use. Please choose another.");
-      } else {
-        // Store the original URL with the slug as the document ID
-        await setDoc(docRef, {
-          originalUrl: url,
-          slug: slug,
-        });
-        // Set the short URL
-        setShortUrl(`${window.location.origin}/${slug}`);
-        // Reset input fields
+      try {
+        const response = await axios.post('/api/shorten', { url, customSlug });
+        setShortUrl(response.data.shortUrl);
         setUrl("");
         setCustomSlug("");
+      } catch (error) {
+        console.error(error);
+        // alert(error.response?.data?.error || 'An error occurred. Please try again.');
       }
     } else {
       alert("Please enter a valid URL.");
