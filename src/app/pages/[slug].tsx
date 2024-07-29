@@ -33,27 +33,30 @@
 // }
 
 
-
 // pages/[slug].js
-import { firestore } from "../firebase/firebase"; // Make sure to configure Firebase
+import { firestore } from "../firebase/firebase"; // Ensure Firebase is properly configured
 import { doc, getDoc } from "firebase/firestore";
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const Redirect = ({ originalUrl }) => {
+const RedirectPage = ({ originalUrl }) => {
   const router = useRouter();
 
-  if (typeof window !== 'undefined') {
-    // Redirect to the original URL
-    router.replace(originalUrl);
-  }
+  useEffect(() => {
+    if (originalUrl) {
+      // Client-side redirection as a fallback
+      router.replace(originalUrl);
+    }
+  }, [originalUrl, router]);
 
-  return null; // Or you can return a loading state
+  return null; // Optionally, you can return a loading spinner or similar UI
 };
 
 export async function getServerSideProps(context) {
   const { slug } = context.params;
 
   try {
+    // Access Firestore document based on the slug
     const docRef = doc(firestore, "urls", slug);
     const docSnap = await getDoc(docRef);
 
@@ -61,24 +64,24 @@ export async function getServerSideProps(context) {
       const data = docSnap.data();
       const { originalUrl } = data;
 
+      // Redirect to the original URL
       return {
-        props: { originalUrl }, // Pass originalUrl to the component
         redirect: {
           destination: originalUrl,
-          permanent: false,
+          permanent: false, // Indicates the redirect is not permanent
         },
       };
     } else {
       return {
-        notFound: true, // Redirect to a 404 page if the slug does not exist
+        notFound: true, // Show 404 page if the slug does not exist
       };
     }
   } catch (error) {
-    console.error("Error fetching document:", error);
+    console.error("Error fetching document from Firestore:", error);
     return {
-      notFound: true, // Handle error gracefully
+      notFound: true, // Show 404 page in case of error
     };
   }
 }
 
-export default Redirect;
+export default RedirectPage;
