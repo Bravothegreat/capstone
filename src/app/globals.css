@@ -30,6 +30,7 @@ form{
 
 .shortner-div{
   width: 300px;
+  border: 1px solid red;
   display: flex;
   gap: 1rem;
   flex-direction: column;
