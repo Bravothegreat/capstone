@@ -84,27 +84,32 @@ export default function Signup() {
      const user = result.user;
 
      if (user) {
-       // google authenticated
-       const profileName = user.displayName || "User"
-       // use displayName for googgle
+      
+        const firstName = user.displayName || "User"
+         
+         const lastName = user.displayName || "User"
 
        // check if user data exist in firestore
        const userDoc = await getDoc(doc(firestore, "user", user.uid));
+
        if (!userDoc.exists()) {
          // save data to firestore
          await setDoc(doc(firestore, "users", user.uid), {
-         profileName,
+         firstName,
+          lastName,
+        
          email: user.email,  
          });
        }
        // store user data in local storage
-       localStorage.setItem(
-         "userData",
-         JSON.stringify({
-           uid: user.uid,
-           profileName,
-           email: user.email,
-         })
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({
+            uid: user.uid,
+            firstName,
+            lastName,
+            email: user.email,
+          })
        );
        // navigate to dashboard
        router.push("/dashboard");

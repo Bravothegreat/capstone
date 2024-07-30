@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword,  signInWithPopup } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Link from "next/link";
-import { googleAuthProvider } from "../firebase/firebase";
+import { GoogleAuthProvider } from "firebase/auth";
 
  const Signin = () => {
   const [email, setEmail] = useState("");                                                           
@@ -14,48 +14,6 @@ import { googleAuthProvider } from "../firebase/firebase";
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleSiginwithGoogle = async () => {
-    try {
-      const userCredential = await signInWithPopup(auth, googleAuthProvider);
-      console.log(userCredential);
-
-      const user = userCredential.user;
-      if (user.emailVerified) {
-        // retrive user data from local storage
-
-        const registrationData = localStorage.getItem("registrationData");
-        const {
-          firstName = "",
-          lastName = "",
-          password = "",
-        } = registrationData ? JSON.parse(registrationData) : {};
-
-        //check if user data is valid and exist in firebase
-
-        const userDoc = await getDoc(doc(firestore, "user", user.uid));
-        if (!userDoc.exists()) {
-
-          // save user data to firestre after email verification
-
-          await setDoc(doc(firestore, "user", user.uid), {
-            firstName,
-            lastName,
-            password,
-            email: user.email,
-          });
-        }
-        router.push("/dashboard");
-      } else {
-        setError("please verify your email before logging in");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred");
-      }
-    }
-  };
 
   const handleSigin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -103,6 +61,47 @@ import { googleAuthProvider } from "../firebase/firebase";
     }
   };
 
+
+  const handleSiginwithGoogle = async () => {
+    setError(null);
+
+    try {
+      const googleAuthProvider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, googleAuthProvider);
+      const user = result.user;
+
+      // check if user data exist in firestore
+      const userDoc = await getDoc(doc(firestore, "users", user.uid));
+      if (!userDoc.exists()) {
+        // save data to firestore
+        await setDoc(doc(firestore, "users", user.uid), {
+          email: user.email,
+          firstName: user.displayName || "User",
+          lastName: user.displayName || "User",
+        });
+      }
+      // store user data in local storage
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+          firstName: user.displayName || "User",
+          lastName: user.displayName || "User",
+        })
+      );
+      router.push("/dashboard");
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred. Please try again");
+      }
+    }
+
+ 
+
+
   return (
     <>
       <div>
@@ -144,7 +143,7 @@ import { googleAuthProvider } from "../firebase/firebase";
          
 
           <button>Sign In</button>
-          {/* {error && <p>{error}</p>} */}
+        
           {error && <p style={{ color: "red" }}>{error}</p>}
 
           <p className="link">
@@ -172,9 +171,5 @@ import { googleAuthProvider } from "../firebase/firebase";
     </>
   );
 }
-
+ }
 export default Signin;
-
-
-
-                          
