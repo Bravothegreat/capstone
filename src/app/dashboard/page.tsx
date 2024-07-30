@@ -7,6 +7,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import type { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import UrlShortener from "../component/urlshortener";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
@@ -62,7 +63,7 @@ export default function Dashboard() {
         {username && <h1> Welcome, {username}!</h1>}
 
         <button onClick={handleLogout}> Logout</button>
-        {/* <UrlShortener /> */}
+        <UrlShortener />
      
       </main>
      </div>

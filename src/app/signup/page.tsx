@@ -78,53 +78,64 @@ export default function Signup() {
    
   const handleSigninnWithGoogle = async () => {
     setError(null);
-
+  
     try {
-     const googleAuthProvider = new GoogleAuthProvider();
-     const result = await signInWithPopup(auth, googleAuthProvider);
-     const user = result.user;
-
-     if (user) {
-      
-        const firstName = user.displayName || "User";
-         
-         const lastName = user.displayName || "User";
-
-       // check if user data exist in firestore
-       const userDoc = await getDoc(doc(firestore, "users", user.uid));
-
-       if (!userDoc.exists()) {
-         // save data to firestore
-         await setDoc(doc(firestore, "users", user.uid), {
-         firstName,
-          lastName,
-        
-         email: user.email,  
-         });
-       }
-       // store user data in local storage
+      const googleAuthProvider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, googleAuthProvider);
+      const user = result.user;
+  
+      if (user) {
+        const { displayName, email, uid } = user;
+        let firstName = "";
+        let lastName = "";
+  
+        // Retrieve user data from local storage
+        const userData = localStorage.getItem("userData");
+        if (userData) {
+          const storedData = JSON.parse(userData);
+          firstName = storedData.firstName || firstName;
+          lastName = storedData.lastName || lastName;
+        }
+  
+   
+  
+        // Check if user data exists in Firestore
+        const userDoc = await getDoc(doc(firestore, "users", uid));
+  
+        if (!userDoc.exists()) {
+          // Save data to Firestore
+          await setDoc(doc(firestore, "users", uid), {
+            firstName,
+            lastName,
+            email: email || "",
+          });
+        }
+  
+        // Store user data in local storage
         localStorage.setItem(
           "userData",
           JSON.stringify({
-            uid: user.uid,
+            uid,
             firstName,
             lastName,
-            email: user.email,
+            email: email || "",
           })
-       );
-       // navigate to dashboard
-       router.push("/dashboard");
-     } else {
-       setError("Failed to authenticate with Google")
-     }
+        );
+  
+        // Navigate to dashboard
+        router.push("/dashboard");
+      } else {
+        setError("Failed to authenticate with Google");
+      }
     } catch (error) {
       if (error instanceof Error) {
-       setError(error.message);
+        setError(error.message);
       } else {
-       setError("An unknown error occured. Please try again")
+        setError("An unknown error occurred. Please try again");
       }
-    };
-  }
+    }
+  };
+  
 
 
 
