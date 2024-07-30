@@ -1,4 +1,4 @@
-// "use client"
+ "use client"
 
 import { GetServerSideProps } from "next";
 import { firestore } from "../firebase/firebase";
@@ -15,17 +15,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       redirect: {
-        destination: "https://www.google.com",
+        destination: docSnap.data().originalUrl,
         permanent: false,
       },
     };
 
-    // return {
-    //   redirect: {
-    //     destination: docSnap.data().originalUrl,
-    //     permanent: false,
-    //   },
-    // };
+   
   } else {
     return {
       notFound: true,
@@ -34,8 +29,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 };
 
-// export default function Redirect() {
-//   return <div>Redirecting...</div>;
-// }
+const RedirectPage = () => {
+  return <div> Redirecting </div>;
+};
 
+export default RedirectPage;
 
