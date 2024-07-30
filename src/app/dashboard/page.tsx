@@ -1,7 +1,7 @@
 "use client";
 
 // import UrlShortener from "../component/urlshortener";
-import Home from "../page";
+import Home from "../pages/index";
 
 // import Image from "next/image";
 import React, { useState, useEffect } from "react";
