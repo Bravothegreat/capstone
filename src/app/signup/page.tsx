@@ -1,16 +1,20 @@
 "use client";
-import React, { useState, FormEvent } from "react";
+import  { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithPopup,
+  GoogleAuthProvider
 } from "firebase/auth";
-import { auth, googleAuthProvider, firestore } from "../firebase/firebase";
-// import {googleAuthProvider} from "../firebase/firebase";
+import { auth, firestore } from "../firebase/firebase";
+
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
+
 export default function Signup() {
+
+ 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,63 +24,8 @@ export default function Signup() {
   const [message, setMessage] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleSignInWithGoogle = async () => {
-    setError(null);
-    setMessage(null);
-    try {
-      const userCredential = await signInWithPopup(auth, googleAuthProvider);
-      const user = userCredential.user;
-      await sendEmailVerification(user);
-
-      if (user.emailVerified) {
-        setMessage(
-          "Account created successfully. Please verify your email address."
-        );
-
-        // retrive user data from local storage
-        const registrationData = localStorage.getItem("registrationData");
-        const {
-          firstName = "",
-          lastName = "",
-          password = "",
-        } = registrationData ? JSON.parse(registrationData) : {};
-
-        //store user data
-        localStorage.setItem(
-          "registrationData",
-          JSON.stringify({
-            firstName,
-            lastName,
-            email,
-          })
-        );
-
-        //check if user data is valid and exist in firebase
-        const userDoc = await getDoc(doc(firestore, "user", user.uid));
-        if (!userDoc.exists()) {
-          await setDoc(doc(firestore, "user", user.uid), {
-            firstName,
-            lastName,
-            password,
-            email: user.email,
-          });
-        }
-
-        setMessage("Signed in with Google successfully.");
-        router.push("/dashboard"); // Redirect to a desired page after successful sign-in
-      } else {
-        setError("please verify your email before logging in");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred");
-      }
-    }
-  };
-
-  const handleSignup = async (event: FormEvent) => {
+  
+ const handleSignup = async (event: FormEvent) => {
     event.preventDefault();
     setError(null);
     setMessage(null);
@@ -124,6 +73,54 @@ export default function Signup() {
       }
     }
   };
+
+   
+  const handleSigninnWithGoogle = async () => {
+    setError(null);
+
+    try {
+     const googleAuthProvider = new GoogleAuthProvider();
+     const result = await signInWithPopup(auth, googleAuthProvider);
+     const user = result.user;
+
+     if (user) {
+       // google authenticated
+       const profileName = user.displayName || "User"
+       // use displayName for googgle
+
+       // check if user data exist in firestore
+       const userDoc = await getDoc(doc(firestore, "user", user.uid));
+       if (!userDoc.exists()) {
+         // save data to firestore
+         await setDoc(doc(firestore, "users", user.uid), {
+         profileName,
+         email: user.email,  
+         });
+       }
+       // store user data in local storage
+       localStorage.setItem(
+         "userData",
+         JSON.stringify({
+           uid: user.uid,
+           profileName,
+           email: user.email,
+         })
+       );
+       // navigate to dashboard
+       router.push("/dashboard");
+     } else {
+       setError("Failed to authenticate with Google")
+     }
+    } catch (error) {
+      if (error instanceof Error) {
+       setError(error.message);
+      } else {
+       setError("An unknown error occured. Please try again")
+      }
+    };
+  }
+
+
 
   return (
     <>
@@ -219,8 +216,11 @@ export default function Signup() {
               <div className="dash"></div>
              </div>
              </form>
-        <button onClick={handleSignInWithGoogle}>Sign up with Google</button>
+        <button onClick={handleSigninnWithGoogle}>Sign up with Google</button>
       </div>
     </>
   );
 }
+
+
+
