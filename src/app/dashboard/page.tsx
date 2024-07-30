@@ -1,9 +1,6 @@
 "use client";
 
 // import UrlShortener from "../component/urlshortener";
-import Home from "../pages/index";
-
-// import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -66,7 +63,7 @@ export default function Dashboard() {
 
         <button onClick={handleLogout}> Logout</button>
         {/* <UrlShortener /> */}
-        <Home />
+     
       </main>
      </div>
     </>

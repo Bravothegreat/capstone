@@ -164,8 +164,9 @@ import { googleAuthProvider } from "../firebase/firebase";
               <div className="dash"></div>
              </div> 
 
-          <button onClick={handleSiginwithGoogle}>Continue with google</button>
+          
         </form>
+        <button onClick={handleSiginwithGoogle}>Continue with google</button>
       
       </div>
     </>

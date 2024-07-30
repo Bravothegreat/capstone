@@ -218,10 +218,8 @@ export default function Signup() {
               <div>OR</div>
               <div className="dash"></div>
              </div>
-
-
-          <button onClick={handleSignInWithGoogle}>Sign up with Google</button>
-        </form>
+             </form>
+        <button onClick={handleSignInWithGoogle}>Sign up with Google</button>
       </div>
     </>
   );
