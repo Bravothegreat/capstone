@@ -41,6 +41,7 @@ export default function Signup() {
         email,
         password
       );
+
       const user = userCredential.user;
       await sendEmailVerification(user);
 
@@ -85,12 +86,12 @@ export default function Signup() {
 
      if (user) {
       
-        const firstName = user.displayName || "User"
+        const firstName = user.displayName || "User";
          
-         const lastName = user.displayName || "User"
+         const lastName = user.displayName || "User";
 
        // check if user data exist in firestore
-       const userDoc = await getDoc(doc(firestore, "user", user.uid));
+       const userDoc = await getDoc(doc(firestore, "users", user.uid));
 
        if (!userDoc.exists()) {
          // save data to firestore

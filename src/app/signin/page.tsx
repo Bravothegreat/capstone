@@ -99,7 +99,7 @@ import { GoogleAuthProvider } from "firebase/auth";
       }
     }
 
- 
+  };
 
 
   return (
@@ -170,6 +170,6 @@ import { GoogleAuthProvider } from "firebase/auth";
       </div>
     </>
   );
-}
+
  }
 export default Signin;
