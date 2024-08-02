@@ -7,6 +7,8 @@
   box-sizing: border-box;
 }
 
+ /*style for authentication form*/
+
  .form h1{
   display: flex;
   justify-content: center;
@@ -16,7 +18,7 @@
   font-weight: bolder;
  }
 
-form{
+ .form{
 
   display: flex;
   flex-direction: column;
@@ -24,18 +26,12 @@ form{
   width: 300px;
   margin: 0 auto;
   gap: 1rem;
- 
+  
   /* border: 1px solid grey; */
 }
 
-.shortner-div{
-  width: 300px;
- 
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  margin-top: 20px;
-}
+
+
 
 .input-group{
   display: flex;
@@ -80,13 +76,7 @@ form{
 
 
 
- /* button{
-      color: white;
-      background-color: green;
-      padding: 10px;
-      border: 1px solid black;
-      border-radius: 40px;
-} */
+
 
 @keyframes error-shake{
   0%{
@@ -137,19 +127,19 @@ margin: 4px 0 4px 10px;
 
 
 
-form button{
+ /* .form button{
  background-color: blue;
  color: #fff;
- /* margin-top: 1rem; */
+
  padding: 0.7rem;
  border-radius: 1.5rem;
-}
+} */
 
-form button:hover{
+/* form button:hover{
 background-color: #fff;
 border: 1px solid #000;
 color: black;
-}
+}  */
 
 
 
@@ -159,10 +149,7 @@ color: black;
  
 }
 
-/* .forgotpass{
-  display: flex;
-  justify-content: end;
-} */
+
 
 
 .dashboard button{
@@ -202,8 +189,7 @@ color: black;
  
 }
 
-/* loader css*/
-
+/*style for loader */
 .loader {
   --dim: 3rem;
   width: var(--dim);
@@ -273,5 +259,26 @@ color: black;
   95%, 100% {
     transform: scale(1) rotate(360deg);
   }
+}
+
+
+ /*style for link shortner*/
+ .shortner-div{
+  width: 400px;
+  background-color: grey;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+
+
+.shortner-form input{
+  border: 1px solid grey;
+  outline: none;
+  padding: 10px;
+  width: 300px;
 }
 

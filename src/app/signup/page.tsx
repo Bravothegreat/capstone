@@ -75,39 +75,26 @@ export default function Signup() {
     }
   };
 
-   
-  const handleSigninnWithGoogle = async () => {
+   const handleSigninnWithGoogle = async () => {
+    
     setError(null);
-  
+    
     try {
-      const googleAuthProvider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, googleAuthProvider);
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
       const user = result.user;
   
       if (user) {
-        const { displayName, email, uid } = user;
-        let firstName = "";
-        let lastName = "";
+        // Google-authenticated users are considered verified
+        const profileName = user.displayName || "User"; // Use displayName from Google
   
-        // Retrieve user data from local storage
-        const userData = localStorage.getItem("userData");
-        if (userData) {
-          const storedData = JSON.parse(userData);
-          firstName = storedData.firstName || firstName;
-          lastName = storedData.lastName || lastName;
-        }
-  
-   
-  
-        // Check if user data exists in Firestore
-        const userDoc = await getDoc(doc(firestore, "users", uid));
-  
+        // Check if user data exist in firestore
+        const userDoc = await getDoc(doc(firestore, "users", user.uid));
         if (!userDoc.exists()) {
-          // Save data to Firestore
-          await setDoc(doc(firestore, "users", uid), {
-            firstName,
-            lastName,
-            email: email || "",
+          // Save user data to firestore
+          await setDoc(doc(firestore, "users", user.uid), {
+            profileName,
+            email: user.email,
           });
         }
   
@@ -115,10 +102,9 @@ export default function Signup() {
         localStorage.setItem(
           "userData",
           JSON.stringify({
-            uid,
-            firstName,
-            lastName,
-            email: email || "",
+            uid: user.uid,
+            profileName,
+            email: user.email,
           })
         );
   
@@ -131,13 +117,11 @@ export default function Signup() {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("An unknown error occurred. Please try again");
+        setError("An unknown error occurred. Please try again.");
       }
-    }
+    } 
   };
   
-
-
 
   return (
     <>
@@ -232,12 +216,12 @@ export default function Signup() {
               <div>OR</div>
               <div className="dash"></div>
              </div>
+            
              </form>
-        <button onClick={handleSigninnWithGoogle}>Sign up with Google</button>
+
+             <button onClick={handleSigninnWithGoogle}>Sign up with Google</button>
+       
       </div>
     </>
   );
 }
-
-
-

@@ -62,43 +62,44 @@ import { GoogleAuthProvider } from "firebase/auth";
   };
 
 
+  
   const handleSiginwithGoogle = async () => {
     setError(null);
-
+    
+  
     try {
-      const googleAuthProvider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, googleAuthProvider);
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
-      // check if user data exist in firestore
+  
+      // Check if user data exist in firestore
       const userDoc = await getDoc(doc(firestore, "users", user.uid));
       if (!userDoc.exists()) {
-        // save data to firestore
+        // Save user data to firestore if it doesn't exist
         await setDoc(doc(firestore, "users", user.uid), {
+          profileName: user.displayName || "User",
           email: user.email,
-          firstName: user.displayName || "User",
-          lastName: user.displayName || "User",
         });
       }
-      // store user data in local storage
+  
+      // Store user data in local storage
       localStorage.setItem(
         "userData",
         JSON.stringify({
           uid: user.uid,
+          profileName: user.displayName || "User",
           email: user.email,
-          firstName: user.displayName || "User",
-          lastName: user.displayName || "User",
         })
       );
+  
       router.push("/dashboard");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("An unknown error occurred. Please try again");
+        setError("An unknown error occurred during Google sign-in");
       }
-    }
-
+    } 
   };
 
 
