@@ -296,32 +296,17 @@
 
 
 
-
 // "use client";
-// import {FaShare} from "react-icons/fa";
+
 // import React, { useState, useEffect, useRef } from "react";
 // import QRCode from "qrcode.react";
-// import { toPng } from "html-to-image"; // Import the html-to-image library
+// import { toPng } from "html-to-image";
 // import { shortenUrl } from "../api/shorten";
 // import { FiLink, FiLink2 } from "react-icons/fi";
-// import {
-//   PiMagicWandFill,
-//   PiMagicWandLight,
-//   PiQrCodeFill,
-// } from "react-icons/pi";
+// import { PiMagicWandFill, PiMagicWandLight, PiQrCodeFill } from "react-icons/pi";
 // import Dropdown from "./Dropdown";
-// import {
-//   FaTwitter,
-//   FaLinkedin,
-//   FaTelegram,
-//   FaTimes,
-// } from "react-icons/fa";
-// import {
-//   IoLogoWhatsapp,
-//   IoIosMail,
-//   IoIosCopy,
-//   IoMdCheckmarkCircle,
-// } from "react-icons/io";
+// import { FaTwitter, FaLinkedin, FaShare, FaTelegram, FaTimes, FaDownload } from "react-icons/fa";
+// import { IoLogoWhatsapp, IoIosMail, IoIosCopy, IoMdCheckmarkCircle } from "react-icons/io";
 // import { TfiSharethis } from "react-icons/tfi";
 
 // const UrlShortener = () => {
@@ -335,31 +320,11 @@
 //   const qrCodeRef = useRef<HTMLDivElement>(null); // Ref for the QR code div
 
 //   const socialItems = [
-//     {
-//       name: "WhatsApp",
-//       icon: <IoLogoWhatsapp />,
-//       url: "https://api.whatsapp.com/send?text=",
-//     },
-//     {
-//       name: "Twitter",
-//       icon: <FaTwitter />,
-//       url: "https://twitter.com/intent/tweet?url=",
-//     },
-//     {
-//       name: "LinkedIn",
-//       icon: <FaLinkedin />,
-//       url: "https://www.linkedin.com/sharing/share-offsite/?url=",
-//     },
-//     {
-//       name: "Telegram",
-//       icon: <FaTelegram />,
-//       url: "https://t.me/share/url?url=",
-//     },
-//     {
-//       name: "Email",
-//       icon: <IoIosMail />,
-//       url: "mailto:?subject=Check+out+this+shortened+URL&body=",
-//     },
+//     { name: "WhatsApp", icon: <IoLogoWhatsapp />, url: "https://api.whatsapp.com/send?text=" },
+//     { name: "Twitter", icon: <FaTwitter />, url: "https://twitter.com/intent/tweet?url=" },
+//     { name: "LinkedIn", icon: <FaLinkedin />, url: "https://www.linkedin.com/sharing/share-offsite/?url=" },
+//     { name: "Telegram", icon: <FaTelegram />, url: "https://t.me/share/url?url=" },
+//     { name: "Email", icon: <IoIosMail />, url: "mailto:?subject=Check+out+this+shortened+URL&body=" },
 //   ];
 
 //   useEffect(() => {
@@ -443,22 +408,18 @@
 //     if (qrCodeRef.current) {
 //       toPng(qrCodeRef.current)
 //         .then((dataUrl) => {
+//           const file = new File([dataUrl], "qrcode.png", { type: "image/png" });
 //           const shareData = {
-//             title: 'QR Code',
-//             text: 'Scan this QR code to visit the shortened URL',
-//             files: [new File([dataUrl], 'qrcode.png', { type: 'image/png' })],
+//             title: "QR Code",
+//             text: "Scan this QR code to visit the shortened URL",
+//             files: [file],
 //           };
-
-//           if (navigator.canShare && navigator.canShare(shareData)) {
-//             navigator.share(shareData)
-//               .then(() => console.log('Share was successful.'))
-//               .catch((error) => console.error('Error sharing', error));
-//           } else {
-//             console.error('Your system doesn\'t support sharing files.');
-//           }
+//           navigator.share(shareData)
+//             .then(() => console.log("QR Code shared successfully"))
+//             .catch((err) => console.error("Error sharing QR Code", err));
 //         })
 //         .catch((err) => {
-//           console.error("Failed to share QR code", err);
+//           console.error("Failed to generate QR code image", err);
 //         });
 //     }
 //   };
@@ -466,15 +427,8 @@
 //   return (
 //     <div className="shortner-div">
 //       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-//         <label
-//           htmlFor="longUrl"
-//           className="flex items-center gap-2 text-xl font-nuno font-normal"
-//         >
-//           {isShortened ? (
-//             <FiLink2 className="text-2xl" />
-//           ) : (
-//             <FiLink className="text-2xl" />
-//           )}
+//         <label htmlFor="longUrl" className="flex items-center gap-2 text-xl font-nuno font-normal">
+//           {isShortened ? <FiLink2 className="text-2xl" /> : <FiLink className="text-2xl" />}
 //           {isShortened ? "Your Long URL" : "Shorten a long URL"}
 //         </label>
 //         <input
@@ -487,27 +441,13 @@
 //           className="w-full text-deep-teal rounded-xl px-3 py-2 mt-2 mb-2 outline-none"
 //           readOnly={isShortened}
 //         />
-//         <label
-//           htmlFor="customAlias"
-//           className="flex items-center gap-2 text-xl font-nuno font-normal"
-//         >
-//           {isShortened ? (
-//             <PiMagicWandLight className="text-2xl" />
-//           ) : (
-//             <PiMagicWandFill className="text-2xl" />
-//           )}
+//         <label htmlFor="customAlias" className="flex items-center gap-2 text-xl font-nuno font-normal">
+//           {isShortened ? <PiMagicWandLight className="text-2xl" /> : <PiMagicWandFill className="text-2xl" />}
 //           {isShortened ? "Snipped URL" : "Customize your link"}
 //         </label>
-//         <div
-//           className={`w-full ${
-//             isShortened ? "" : "flex flex-col md:flex-row gap-2"
-//           }`}
-//         >
+//         <div className={`w-full ${isShortened ? "" : "flex flex-col md:flex-row gap-2"}`}>
 //           {!isShortened && (
-//             <select
-//               name="domain"
-//               className="w-full md:w-3/5 rounded-xl px-3 py-2 mt-2 mb-2 outline-none text-black bg-white"
-//             >
+//             <select name="domain" className="w-full md:w-3/5 rounded-xl px-3 py-2 mt-2 mb-2 outline-none text-black bg-white">
 //               <option value="tiny.one">tiny.one</option>
 //             </select>
 //           )}
@@ -518,14 +458,10 @@
 //               id="customAlias"
 //               value={isShortened ? shortUrl : customAlias}
 //               onChange={(e) => setCustomAlias(e.target.value)}
-//               className={`w-full text-deep-teal rounded-xl px-3 py-2 mt-2 mb-2 outline-none ${
-//                 error ? "input-error" : ""
-//               }`}
+//               className={`w-full text-deep-teal rounded-xl px-3 py-2 mt-2 mb-2 outline-none ${error ? "input-error" : ""}`}
 //               readOnly={isShortened} // Make the input read-only if URL is shortened
 //             />
-//             {error && (
-//               <p className="text-red-600 absolute text-xs bottom">{error}</p>
-//             )}
+//             {error && <p className="text-red-600 absolute text-xs bottom">{error}</p>}
 //           </span>
 //         </div>
 
@@ -590,30 +526,30 @@
 //         </button>
 //       </form>
 
-//       {isShortened &&
-//         shortUrl &&
-//         showQRCode && ( // Conditionally render QR code based on showQRCode state
-//           <div className="mt-4 flex flex-col items-center">
-//             <div ref={qrCodeRef}>
-//               <QRCode value={shortUrl} size={120} />
-//             </div>
-//             <p className="mt-2 text-xs text-gray-600">
-//               Scan this QR code to visit the shortened URL
-//             </p>
-//             <button
-//               onClick={handleDownloadQRCode}
-//               className="bg-deep-teal text-white font-semibold py-2 px-4 rounded mt-2"
-//             >
-//               Download QR Code
-//             </button>
-//             <button
-//               onClick={handleShareQRCode}
-//               className="bg-deep-teal text-white font-semibold py-2 px-4 rounded mt-2"
-//             >
-//               Share QR Code
-//             </button>
+//       {isShortened && shortUrl && showQRCode && ( // Conditionally render QR code based on showQRCode state
+//         <div className="mt-4 flex flex-col items-center">
+//           <div ref={qrCodeRef}>
+//             <QRCode value={shortUrl} size={120} />
 //           </div>
-//         )}
+//           <p className="mt-2 text-xs text-gray-600">
+//             Scan this QR code to visit the shortened URL
+//           </p>
+//           <button
+//             onClick={handleDownloadQRCode}
+//             className="bg-deep-teal text-white font-semibold py-2 px-4 rounded mt-2 flex gap-2 align-center"
+//           >
+//             <FaDownload />
+//             Download QR Code
+//           </button>
+//           <button
+//             onClick={handleShareQRCode}
+//             className="bg-deep-teal text-white font-semibold py-2 px-4 rounded mt-2 flex gap-2 align-center "
+//           >
+//             <FaShare />
+//             Share QR Code
+//           </button>
+//         </div>
+//       )}
 //     </div>
 //   );
 // };
@@ -624,17 +560,37 @@
 
 
 
-   "use client";
+
+
+
+
+ "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { FaDownload } from "react-icons/fa";
 import QRCode from "qrcode.react";
-import { toPng } from "html-to-image";
+import { toPng, toJpeg, toSvg, toCanvas } from "html-to-image"; // Import the html-to-image library
 import { shortenUrl } from "../api/shorten";
 import { FiLink, FiLink2 } from "react-icons/fi";
-import { PiMagicWandFill, PiMagicWandLight, PiQrCodeFill } from "react-icons/pi";
+import {
+  PiMagicWandFill,
+  PiMagicWandLight,
+  PiQrCodeFill,
+} from "react-icons/pi";
 import Dropdown from "./Dropdown";
-import { FaTwitter, FaLinkedin, FaShare, FaTelegram, FaTimes, FaDownload } from "react-icons/fa";
-import { IoLogoWhatsapp, IoIosMail, IoIosCopy, IoMdCheckmarkCircle } from "react-icons/io";
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaShare,
+  FaTelegram,
+  FaTimes,
+} from "react-icons/fa";
+import {
+  IoLogoWhatsapp,
+  IoIosMail,
+  IoIosCopy,
+  IoMdCheckmarkCircle,
+} from "react-icons/io";
 import { TfiSharethis } from "react-icons/tfi";
 
 const UrlShortener = () => {
@@ -645,14 +601,35 @@ const UrlShortener = () => {
   const [copySuccess, setCopySuccess] = useState("");
   const [isShortened, setIsShortened] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false); // State to manage QR code visibility
+  const [downloadFormat, setDownloadFormat] = useState("png"); // State to manage download format
   const qrCodeRef = useRef<HTMLDivElement>(null); // Ref for the QR code div
 
   const socialItems = [
-    { name: "WhatsApp", icon: <IoLogoWhatsapp />, url: "https://api.whatsapp.com/send?text=" },
-    { name: "Twitter", icon: <FaTwitter />, url: "https://twitter.com/intent/tweet?url=" },
-    { name: "LinkedIn", icon: <FaLinkedin />, url: "https://www.linkedin.com/sharing/share-offsite/?url=" },
-    { name: "Telegram", icon: <FaTelegram />, url: "https://t.me/share/url?url=" },
-    { name: "Email", icon: <IoIosMail />, url: "mailto:?subject=Check+out+this+shortened+URL&body=" },
+    {
+      name: "WhatsApp",
+      icon: <IoLogoWhatsapp />,
+      url: "https://api.whatsapp.com/send?text=",
+    },
+    {
+      name: "Twitter",
+      icon: <FaTwitter />,
+      url: "https://twitter.com/intent/tweet?url=",
+    },
+    {
+      name: "LinkedIn",
+      icon: <FaLinkedin />,
+      url: "https://www.linkedin.com/sharing/share-offsite/?url=",
+    },
+    {
+      name: "Telegram",
+      icon: <FaTelegram />,
+      url: "https://t.me/share/url?url=",
+    },
+    {
+      name: "Email",
+      icon: <IoIosMail />,
+      url: "mailto:?subject=Check+out+this+shortened+URL&body=",
+    },
   ];
 
   useEffect(() => {
@@ -719,11 +696,33 @@ const UrlShortener = () => {
 
   const handleDownloadQRCode = () => {
     if (qrCodeRef.current) {
-      toPng(qrCodeRef.current)
+      let downloadFunction;
+      let mimeType;
+      switch (downloadFormat) {
+        case "jpeg":
+          downloadFunction = toJpeg;
+          mimeType = "image/jpeg";
+          break;
+        case "svg":
+          downloadFunction = toSvg;
+          mimeType = "image/svg+xml";
+          break;
+        case "canvas":
+          downloadFunction = toCanvas;
+          mimeType = "image/png"; // Canvas doesn't have a mimeType, but it's often used as PNG
+          break;
+        case "png":
+        default:
+          downloadFunction = toPng;
+          mimeType = "image/png";
+          break;
+      }
+
+      downloadFunction(qrCodeRef.current)
         .then((dataUrl) => {
           const link = document.createElement("a");
           link.href = dataUrl;
-          link.download = "qrcode.png";
+          link.download = `qrcode.${downloadFormat}`;
           link.click();
         })
         .catch((err) => {
@@ -732,31 +731,56 @@ const UrlShortener = () => {
     }
   };
 
-  const handleShareQRCode = () => {
+
+
+
+       
+
+  const handleShareQRCode = async () => {
     if (qrCodeRef.current) {
-      toPng(qrCodeRef.current)
-        .then((dataUrl) => {
-          const file = new File([dataUrl], "qrcode.png", { type: "image/png" });
-          const shareData = {
+      try {
+        // Convert QR code to PNG data URL
+        const dataUrl = await toPng(qrCodeRef.current);
+        
+        // Convert data URL to Blob
+        const response = await fetch(dataUrl);
+        const blob = await response.blob();
+  
+        // Use the Web Share API if available
+        if (navigator.share) {
+          await navigator.share({
             title: "QR Code",
             text: "Scan this QR code to visit the shortened URL",
-            files: [file],
-          };
-          navigator.share(shareData)
-            .then(() => console.log("QR Code shared successfully"))
-            .catch((err) => console.error("Error sharing QR Code", err));
-        })
-        .catch((err) => {
-          console.error("Failed to generate QR code image", err);
-        });
+            files: [new File([blob], 'qrcode.png', { type: 'image/png' })],
+          });
+        } else {
+          console.warn("Web Share API is not supported in this browser.");
+        }
+      } catch (err) {
+        console.error("Failed to share QR code", err);
+      }
     }
   };
+  
+
+   
+          
+
+  
+     
 
   return (
     <div className="shortner-div">
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <label htmlFor="longUrl" className="flex items-center gap-2 text-xl font-nuno font-normal">
-          {isShortened ? <FiLink2 className="text-2xl" /> : <FiLink className="text-2xl" />}
+        <label
+          htmlFor="longUrl"
+          className="flex items-center gap-2 text-xl font-nuno font-normal"
+        >
+          {isShortened ? (
+            <FiLink2 className="text-2xl" />
+          ) : (
+            <FiLink className="text-2xl" />
+          )}
           {isShortened ? "Your Long URL" : "Shorten a long URL"}
         </label>
         <input
@@ -769,13 +793,25 @@ const UrlShortener = () => {
           className="w-full text-deep-teal rounded-xl px-3 py-2 mt-2 mb-2 outline-none"
           readOnly={isShortened}
         />
-        <label htmlFor="customAlias" className="flex items-center gap-2 text-xl font-nuno font-normal">
-          {isShortened ? <PiMagicWandLight className="text-2xl" /> : <PiMagicWandFill className="text-2xl" />}
+        <label
+          htmlFor="customAlias"
+          className="flex items-center gap-2 text-xl font-nuno font-normal"
+        >
+          {isShortened ? (
+            <PiMagicWandLight className="text-2xl" />
+          ) : (
+            <PiMagicWandFill className="text-2xl" />
+          )}
           {isShortened ? "Snipped URL" : "Customize your link"}
         </label>
-        <div className={`w-full ${isShortened ? "" : "flex flex-col md:flex-row gap-2"}`}>
+        <div
+          className={`w-full ${isShortened ? "" : "flex flex-col md:flex-row gap-2"}`}
+        >
           {!isShortened && (
-            <select name="domain" className="w-full md:w-3/5 rounded-xl px-3 py-2 mt-2 mb-2 outline-none text-black bg-white">
+            <select
+              name="domain"
+              className="w-full md:w-3/5 rounded-xl px-3 py-2 mt-2 mb-2 outline-none text-black bg-white"
+            >
               <option value="tiny.one">tiny.one</option>
             </select>
           )}
@@ -786,10 +822,14 @@ const UrlShortener = () => {
               id="customAlias"
               value={isShortened ? shortUrl : customAlias}
               onChange={(e) => setCustomAlias(e.target.value)}
-              className={`w-full text-deep-teal rounded-xl px-3 py-2 mt-2 mb-2 outline-none ${error ? "input-error" : ""}`}
+              className={`w-full text-deep-teal rounded-xl px-3 py-2 mt-2 mb-2 outline-none ${
+                error ? "input-error" : ""
+              }`}
               readOnly={isShortened} // Make the input read-only if URL is shortened
             />
-            {error && <p className="text-red-600 absolute text-xs bottom">{error}</p>}
+            {error && (
+              <p className="text-red-600 absolute text-xs bottom">{error}</p>
+            )}
           </span>
         </div>
 
@@ -854,30 +894,44 @@ const UrlShortener = () => {
         </button>
       </form>
 
-      {isShortened && shortUrl && showQRCode && ( // Conditionally render QR code based on showQRCode state
-        <div className="mt-4 flex flex-col items-center">
-          <div ref={qrCodeRef}>
-            <QRCode value={shortUrl} size={120} />
+      {isShortened &&
+        shortUrl &&
+        showQRCode && ( // Conditionally render QR code based on showQRCode state
+          <div className="mt-4 flex flex-col items-center">
+            <div ref={qrCodeRef}>
+              <QRCode value={shortUrl} size={120} />
+            </div>
+            <p className="mt-2 text-xs text-gray-600">
+              Scan this QR code to visit the shortened URL
+            </p>
+            <div className="flex flex-col items-center gap-2 mt-2">
+              <div className="flex items-center gap-2">
+                <select
+                  value={downloadFormat}
+                  onChange={(e) => setDownloadFormat(e.target.value)}
+                  className="w-full md:w-auto rounded-xl px-3 py-2 outline-none text-black bg-white"
+                >
+                  <option value="png">PNG</option>
+                  <option value="jpeg">JPEG</option>
+                  <option value="svg">SVG</option>
+                  <option value="canvas">Canvas</option>
+                </select>
+                <button
+                  onClick={handleDownloadQRCode}
+                  className="bg-deep-teal text-white font-semibold py-2 px-4 rounded"
+                >
+                  Download QR Code
+                </button>
+              </div>
+              <button
+                onClick={handleShareQRCode}
+                className="bg-deep-teal text-white font-semibold py-2 px-4 rounded"
+              >
+                Share QR Code
+              </button>
+            </div>
           </div>
-          <p className="mt-2 text-xs text-gray-600">
-            Scan this QR code to visit the shortened URL
-          </p>
-          <button
-            onClick={handleDownloadQRCode}
-            className="bg-deep-teal text-white font-semibold py-2 px-4 rounded mt-2"
-          >
-            <FaDownload />
-            Download QR Code
-          </button>
-          <button
-            onClick={handleShareQRCode}
-            className="bg-deep-teal text-white font-semibold py-2 px-4 rounded mt-2"
-          >
-            <FaShare />
-            Share QR Code
-          </button>
-        </div>
-      )}
+        )}
     </div>
   );
 };
