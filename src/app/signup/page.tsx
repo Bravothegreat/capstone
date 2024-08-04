@@ -1,5 +1,7 @@
+
+
 "use client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   createUserWithEmailAndPassword,
@@ -18,11 +20,22 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const router = useRouter();
+  let errorTimeout: NodeJS.Timeout;
+
+  useEffect(() => {
+    if (error) {
+      errorTimeout = setTimeout(() => {
+        setError(null);
+      }, 4000); // Clear error message after 5 seconds
+    }
+
+    // Clean up the timeout if the component unmounts
+    return () => clearTimeout(errorTimeout);
+  }, [error]);
 
   const handleSignin = async (event: FormEvent) => {
     event.preventDefault();
@@ -45,7 +58,6 @@ const Signup = () => {
       const user = userCredential.user;
 
       await sendEmailVerification(user);
-      // router.push("/successRegistration");
       // Temporarily store user data in local storage
       localStorage.setItem(
         "registrationData",
@@ -59,7 +71,7 @@ const Signup = () => {
         "Account created successfully. Please verify your email address."
       );
 
-      // Clear form fiels
+      // Clear form fields
       setProfileName("");
       setEmail("");
       setPassword("");
@@ -68,10 +80,10 @@ const Signup = () => {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("An unkown error occurred. Please try again.");
+        setError("An unknown error occurred. Please try again.");
       }
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -85,20 +97,16 @@ const Signup = () => {
       const user = result.user;
 
       if (user) {
-        // Google-authenticated users are considered verified
-        const profileName = user.displayName || "User"; // Use displayName from Google
+        const profileName = user.displayName || "User";
 
-        // Check if user data exist in firestore
         const userDoc = await getDoc(doc(firestore, "users", user.uid));
         if (!userDoc.exists()) {
-          // Save user data to firestore
           await setDoc(doc(firestore, "users", user.uid), {
             profileName,
             email: user.email,
           });
         }
 
-        // Store user data in local storage
         localStorage.setItem(
           "userData",
           JSON.stringify({
@@ -108,7 +116,6 @@ const Signup = () => {
           })
         );
 
-        // Navigate to dashboard
         router.push("/dashboard");
       } else {
         setError("Failed to authenticate with Google");
@@ -129,14 +136,12 @@ const Signup = () => {
       <form onSubmit={handleSignin} className="form">
         <div className="form-header">
           <p className="link">
-            {" "}
             <a href="#" onClick={() => router.push("/")}>
               <IoIosArrowRoundBack className="back-arrow" />
             </a>
           </p>
           <h1>Create Scissors Account</h1>
           <p className="link">
-            {" "}
             <a href="#" onClick={() => router.push("/signin")}>
               Login Now
             </a>
@@ -150,10 +155,8 @@ const Signup = () => {
             placeholder=""
             value={profileName}
             onChange={(e) => setProfileName(e.target.value)}
-            // required
             className="input-group_input"
           />
-
           <label htmlFor="profileName" className="input-group_label">
             UserName
           </label>
@@ -167,9 +170,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder=""
             className="input-group_input"
-            // required
           />
-
           <label htmlFor="email" className="input-group_label">
             Email Address
           </label>
@@ -184,9 +185,7 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder=""
             className="input-group_input"
-            // required
           />
-
           <label htmlFor="password" className="input-group_label">
             Password
           </label>
@@ -200,22 +199,19 @@ const Signup = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder=""
             className="input-group_input"
-            // required
           />
-
           <label htmlFor="confirmPassword" className="input-group_label">
             Confirm Password
           </label>
         </div>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-
         {message && <p style={{ color: "green" }}>{message}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className={` ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
@@ -247,3 +243,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

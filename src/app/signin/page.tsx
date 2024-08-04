@@ -1,6 +1,7 @@
+
+
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   signInWithEmailAndPassword,
@@ -9,19 +10,30 @@ import {
 } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-// import Link from "next/link";
 import Image from "next/image";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
-import { AiTwotoneEye } from "react-icons/ai";
-import { AiTwotoneEyeInvisible } from "react-icons/ai";
+import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
+  let errorTimeout: NodeJS.Timeout;
+
+  useEffect(() => {
+    if (error) {
+      errorTimeout = setTimeout(() => {
+        setError(null);
+      }, 4000); // Clear error message after 5 seconds
+    }
+
+    // Clean up the timeout if the component unmounts
+    return () => clearTimeout(errorTimeout);
+  }, [error]);
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -59,7 +71,6 @@ const Signin = () => {
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
-        return;
       } else {
         setError("An unknown error occurred");
       }
@@ -109,8 +120,6 @@ const Signin = () => {
     }
   };
 
-  const [isVisible, setIsVisible] = React.useState(false);
-
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
@@ -118,14 +127,12 @@ const Signin = () => {
       <form onSubmit={handleLogin} className="form">
         <div className="form-header">
           <p className="link">
-            {" "}
             <a href="#" onClick={() => router.push("/")}>
               <IoIosArrowRoundBack className="back-arrow" />
             </a>
           </p>
           <h1> Scissors Login</h1>
           <p className="link">
-            {" "}
             <a href="#" onClick={() => router.push("/signup")}>
               Sign Up
             </a>
@@ -160,7 +167,6 @@ const Signin = () => {
           />
 
           <span
-            className=""
             onClick={toggleVisibility}
             aria-label="toggle password visibility"
           >
@@ -219,3 +225,4 @@ const Signin = () => {
 };
 
 export default Signin;
+
