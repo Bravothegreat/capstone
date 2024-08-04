@@ -184,35 +184,9 @@ const UrlShortener = () => {
     }
   };
 
-  // const handleShareQRCode = async () => {
-  //   if (qrCodeRef.current) {
-  //     try {
-  //       // Convert QR code to PNG data URL
-  //       const dataUrl = await toPng(qrCodeRef.current);
+  
 
-  //       // Convert data URL to Blob
-  //       const response = await fetch(dataUrl);
-  //       const blob = await response.blob();
-
-  //       // Use the Web Share API if available
-  //       if (navigator.share) {
-  //         await navigator.share({
-  //           title: "QR Code",
-  //           text: "Scan this QR code to visit the shortened URL",
-  //           files: [new File([blob], "qrcode.png", { type: "image/png" })],
-  //         });
-  //       } else {
-  //         console.warn("Web Share API is not supported in this browser.");
-  //       }
-  //     } catch (err) {
-  //       console.error("Failed to share QR code", err);
-  //     }
-  //   }
-  // };
-
-
-    
-  const handleShareQRCodeAsSVG = async () => {
+ const handleShareQRCodeAsSVG = async () => {
     if (qrCodeRef.current) {
       try {
         // Convert QR code to SVG data URL

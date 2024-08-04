@@ -9,11 +9,29 @@
 
  /*style for authentication form*/
 
- .form h1{
+ .form-container{
+  /* border: 1px solid red; */
+  
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 400px;
+   margin: 0 auto;
+   margin-top: 30px;
+ 
+ }
+
+ .form-header{
   display: flex;
-  justify-content: center;
-  margin: 1.8rem 0 0.5rem 0;
-  font-size: 2rem;
+  justify-content: space-between;
+  margin-bottom: 10px;
+ }
+
+ .form h1{
+  /* display: flex;
+  justify-content: center; */
+  /* margin: 1.8rem 0 0.5rem 0; */
+  font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
  }
@@ -23,12 +41,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 300px;
+  width: 380px;
   margin: 0 auto;
   gap: 1rem;
   
   /* border: 1px solid grey; */
 }
+
+ .back-arrow{
+  width: 2rem;
+  height: 2rem;
+ }
+
+
+ .form input:active{
+  border: 1px solid rgb(197, 197, 221);
+ }
 
 
 
@@ -123,23 +151,23 @@ margin: 4px 0 4px 10px;
 .input-group_input:not(:focus):invalid ~ .input-group_label{
   color: red;
   border: 1px solid red;
+  margin-top: -3px;
 }
 
 
 
- /* .form button{
+ .form button{
  background-color: blue;
  color: #fff;
+padding: 0.7rem;
+ border-radius: 10px;
+} 
 
- padding: 0.7rem;
- border-radius: 1.5rem;
-} */
-
-/* form button:hover{
+ form button:hover{
 background-color: #fff;
 border: 1px solid #000;
 color: black;
-}  */
+} 
 
 
 
@@ -161,7 +189,7 @@ color: black;
 
 }
 
-.dashboard button:hover{
+ .dashboard button:hover{
   background-color: #fff;
   border: 1px solid #000;
   color: black;
@@ -177,15 +205,20 @@ color: black;
   justify-content: center;
   margin: 0 auto;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   
 }
 
+.continue-with{
+  /* text-wrap: none; */
+  white-space: nowrap;
+}
+
 .dash{
-  border-top-width: 1px;
+ border-top-width: 2px;
   width: 8rem;
-  height: 0px;
-  border: 1px solid grey;
+  
+  border: -1px solid grey;
  
 }
 
@@ -282,3 +315,19 @@ color: black;
   width: 300px;
 }
 
+/*google sign button*/
+.google-sign{
+  display: flex;
+  margin: 0 auto;
+  gap: 5px;
+  margin-top: 15px;
+  border: 1px solid grey;
+  width: 370px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.google-sign .google-image{
+ 
+   margin-left: 130px;
+}

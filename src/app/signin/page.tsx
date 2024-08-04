@@ -1,23 +1,30 @@
-"use client";
-import React, { useState } from "react";
-import  { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword,  signInWithPopup } from "firebase/auth";
+
+
+ "use client";
+import React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import Link from "next/link";
-import { GoogleAuthProvider } from "firebase/auth";
+// import Link from "next/link";
+import Image from "next/image";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
- const Signin = () => {
-  const [email, setEmail] = useState("");                                                           
-  
+import { AiTwotoneEye } from "react-icons/ai";
+import { AiTwotoneEyeInvisible } from "react-icons/ai";
+
+const Signin = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-
-  const handleSigin = async (event: React.FormEvent) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     setError(null);
+    setLoading(true);
 
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -25,47 +32,43 @@ import { GoogleAuthProvider } from "firebase/auth";
         email,
         password
       );
-
       const user = userCredential.user;
+
       if (user.emailVerified) {
-        // retrive user data from local storage
-
+        // Retrieve user data from local storage
         const registrationData = localStorage.getItem("registrationData");
-        const {
-          firstName = "",
-          lastName = "",
-          password = "",
-        } = registrationData ? JSON.parse(registrationData) : {};
+        const { profileName = "" } = registrationData
+          ? JSON.parse(registrationData)
+          : {};
 
-        // check if user data is valid and exist in firebase
-
-        const userDoc = await getDoc(doc(firestore, "user", user.uid));
+        // Check if user data exist in firestore
+        const userDoc = await getDoc(doc(firestore, "users", user.uid));
         if (!userDoc.exists()) {
-          await setDoc(doc(firestore, "user", user.uid), {
-            firstName,
-            lastName,
-            password,
+          // Save user data to firestore after email verification
+          await setDoc(doc(firestore, "users", user.uid), {
+            profileName,
             email: user.email,
           });
         }
         router.push("/dashboard");
       } else {
-        setError("please verify your email before logging in");
+        setError("Please verify your email address");
       }
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
+        return;
       } else {
         setError("An unknown error occurred");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
-
-  
-  const handleSiginwithGoogle = async () => {
+  const handleGoogleSignIn = async () => {
     setError(null);
-    
+    setLoading(true);
   
     try {
       const provider = new GoogleAuthProvider();
@@ -99,78 +102,141 @@ import { GoogleAuthProvider } from "firebase/auth";
       } else {
         setError("An unknown error occurred during Google sign-in");
       }
-    } 
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
-    <>
-      <div>
-        <form
-         className="form"
-        onSubmit={handleSigin}>
-          <h1>Sign In</h1>
-
-          <div className="input-group">
-           <input
-            className="input-group_input"
-            placeholder=""
-            type="email"
-            // required
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-            <label
-             className="input-group_label"
-            >
-              Email </label>
-             <span className="error">Not a valid Email</span>
-          </div>
-
+  
+     
+      <div className="form-container">
         
-          <div className="input-group">
+        <form onSubmit={handleLogin} className="form">
+        <div className="form-header">
+           <p  className="link">
+            {" "}
+            <a href="#" onClick={() => router.push("/")}>
+            <IoIosArrowRoundBack  className="back-arrow" /> 
+            </a>
+            </p>
+           <h1> Scissors Login</h1>
+           <p  className="link">
+            {" "}
+            <a href="#" onClick={() => router.push("/signup")}>
+              Sign Up
+            </a>
+            </p>
+           </div>
+
+            <div className="input-group">
+
+           
             <input
-            className="input-group_input"
-            placeholder=""
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-              <label
-               className="input-group_label"
+              type="email"
+              id="Email"
+              name="Email"
+              placeholder=""
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="input-group_input"
+             
+            />
+
+             <label
+               htmlFor="email"
+              className="input-group_label"
+            >
+              Email Address
+            </label>
+
+            </div>
+            
+            <div className="input-group">
+            
+            
+              <input
+                type={isVisible ? "text" : "password"}
+                id="password"
+                name="password"
+                placeholder=""
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                className="input-group_input"
+                
+              />
+
+              <span
+                className=""
+                
+                onClick={toggleVisibility}
+                aria-label="toggle password visibility"
               >
-                Password</label>
-          </div>
-         
+                {isVisible ? (
+                  <AiTwotoneEyeInvisible className="text-2xl text-default-400 text-deep-purple absolute right-2 bottom-2" />
+                ) : (
+                  <AiTwotoneEye className="text-2xl text-default-400 text-deep-purple absolute right-2 bottom-2" />
+                )}
+              </span>
 
-          <button>Sign In</button>
-        
-          {error && <p style={{ color: "red" }}>{error}</p>}
+            
+     
+             <label
+              htmlFor="password"
+              className="input-group_label"
+            >
+              Password
+            </label>
+            </div>
 
-          <p className="link">
+              
+
+             
+
+           
+            
+              {error && <p style={{color: "red"}}>{error}</p>}
+           
           
-          <Link 
-           className="forgotpass"
-          href="/resetpassword">Forgot password</Link>
-        </p>
-
-          <p className="link">
-            Don't have an account? <Link href="/signup">Sign up here</Link>
-          </p>
+          <button
+            type="submit"
+            disabled={loading} 
+            className={` ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            {loading ? "Signing In..." : "Sign In"}
+          </button>
 
           <div className="or">
               <div className="dash"></div>
-              <div>OR</div>
+              <div className="continue-with">or go with</div>
               <div className="dash"></div>
-             </div> 
+             </div>
 
-          
         </form>
-        <button onClick={handleSiginwithGoogle}>Continue with google</button>
+        
+          
+            <button onClick={handleGoogleSignIn} disabled={loading} className="google-sign">
+              <Image
+                className="google-image"
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                width={20}
+                height={5}
+                loading="lazy"
+                alt="google logo"
+              />
+              <span> Google</span>
+            </button>
+          
+        
       
-      </div>
-    </>
+    </div>
   );
+};
 
- }
 export default Signin;
