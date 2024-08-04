@@ -48,6 +48,14 @@
   /* border: 1px solid grey; */
 }
 
+ .forgot-password{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: blue;
+ }
+
  .back-arrow{
   width: 2rem;
   height: 2rem;
@@ -215,10 +223,10 @@ color: black;
 }
 
 .dash{
- border-top-width: 2px;
+ /* border-top-width: 2px; */
   width: 8rem;
   
-  border: -1px solid grey;
+  border: 1px solid grey;
  
 }
 

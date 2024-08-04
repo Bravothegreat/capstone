@@ -14,7 +14,7 @@ const ResetLinkPage = () => {
       <div className=" sm:mx-auto relative h-screen flex flex-col items-center justify-center gap-5 py-5">
         {/*Tot-left back Icon... */}
         <Link href="/resetpassword">
-         back
+         
         </Link>
         
         <h4 className="text-[39px] font-medium text-deep-purple">

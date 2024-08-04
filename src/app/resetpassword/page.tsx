@@ -38,7 +38,7 @@ const ResetPassword = () => {
          className="h-10 w-10 text-dark-gray absolute top-5 -left-5"
         >
            
-          <FaChevronLeft className="h-10 w-10 text-dark-gray absolute top-5 -left-5" />
+          {/* <FaChevronLeft className="h-10 w-10 text-dark-gray absolute top-5 -left-5" /> */}
         </Link>
         <h1 className="font-medium text-4xl text-deep-purple">Reset Password</h1>
         <span>
@@ -72,7 +72,7 @@ const ResetPassword = () => {
 
           <span className="error">Not a valid Email</span>
 
-            {error && <p>{error}</p>}
+           {error && <p style={{ color: "red" }}>{error}</p>}
           <button
             type="submit"
             className="w-full border-2 rounded-xl px-3 py-3 mt-6 text-center bg-deep-purple text-light-gray"
