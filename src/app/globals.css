@@ -2,81 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-
-*{
+* {
   box-sizing: border-box;
 }
 
- /*style for authentication form*/
+/*style for authentication form*/
 
- .form-container{
+.form-container {
   /* border: 1px solid red; */
-  
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   width: 400px;
-   margin: 0 auto;
-   margin-top: 30px;
- 
- }
 
- .form-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.form-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
- }
+}
 
- .form h1{
+.form h1 {
   /* display: flex;
   justify-content: center; */
   /* margin: 1.8rem 0 0.5rem 0; */
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
- }
+}
 
- .form{
-
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 380px;
   margin: 0 auto;
   gap: 1rem;
-  
+
   /* border: 1px solid grey; */
 }
 
- .forgot-password{
+.forgot-password {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
   font-size: 0.8rem;
   color: blue;
- }
+}
 
- .back-arrow{
+.back-arrow {
   width: 2rem;
   height: 2rem;
- }
+}
 
-
- .form input:active{
+.form input:active {
   border: 1px solid rgb(197, 197, 221);
- }
+}
 
-
-
-
-.input-group{
+.input-group {
   display: flex;
   flex-direction: column;
   position: relative;
-  
 }
 
-.input-group_input{
+.input-group_input {
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
@@ -84,63 +76,56 @@
   outline: none;
 }
 
-.input-group_input, .error{
+.input-group_input,
+.error {
   left: 0;
   position: relative;
-
 }
 
-.input-group_input ~ .input-group_label{
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background-color: #fff;
-      padding: 0 3px;
-      border: 1px solid transparent;
-      transition: top 300ms, color 300ms, 
-      border-color 300ms, font-size 300ms;
+.input-group_input ~ .input-group_label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #fff;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  transition: top 300ms, color 300ms, border-color 300ms, font-size 300ms;
 }
 
 .input-group_input:focus ~ .input-group_label,
-.input-group_input:not(:placeholder-shown) ~ .input-group_label
-{
-      top: -8px;
-      border: black;
-      transition: 0.15ms;
-      color: blue;
-    }
-
-
-
-
-
-@keyframes error-shake{
-  0%{
-left: -10px;
-  }
-  20%{
-left: 8px;
-  }
-  40%{
-left: -6px;
-  }
-  60%{
-left: 4px;
-  }
-  80%{
-left: -2px;
-  }
-  100%{
-    left: 0;
-  }
-
+.input-group_input:not(:placeholder-shown) ~ .input-group_label {
+  top: -8px;
+  border: black;
+  transition: 0.15ms;
+  color: blue;
 }
 
-.error{
-display: block;
-/* visibility: hidden; */
-display: none;
-margin: 4px 0 4px 10px;
+@keyframes error-shake {
+  0% {
+    left: -10px;
+  }
+  20% {
+    left: 8px;
+  }
+  40% {
+    left: -6px;
+  }
+  60% {
+    left: 4px;
+  }
+  80% {
+    left: -2px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.error {
+  display: block;
+  /* visibility: hidden; */
+  display: none;
+  margin: 4px 0 4px 10px;
   font-size: 1rem;
   color: red;
 }
@@ -150,84 +135,73 @@ margin: 4px 0 4px 10px;
   color: red;
 }
 
-.input-group_input:not(:focus):invalid ~ .error{
+.input-group_input:not(:focus):invalid ~ .error {
   /* visibility: visible; */
   display: block;
-  animation: error-shake 600ms
+  animation: error-shake 600ms;
 }
 
-.input-group_input:not(:focus):invalid ~ .input-group_label{
+.input-group_input:not(:focus):invalid ~ .input-group_label {
   color: red;
   border: 1px solid red;
   margin-top: -3px;
 }
 
-
-
- .form button{
- background-color: blue;
- color: #fff;
-padding: 0.7rem;
- border-radius: 10px;
-} 
-
- form button:hover{
-background-color: #fff;
-border: 1px solid #000;
-color: black;
-} 
-
-
-
-.link a{
- color: blue;
- text-decoration: underline;
- 
-}
-
-
-
-
-.dashboard button{
+.form button {
   background-color: blue;
   color: #fff;
-  margin-top: 1rem;
-  padding: 0.5rem;
-  border-radius: 5px;
-
+  padding: 0.7rem;
+  border-radius: 10px;
 }
 
- .dashboard button:hover{
+form button:hover {
   background-color: #fff;
   border: 1px solid #000;
   color: black;
 }
 
-.authenticate p{
+.link a {
   color: blue;
   text-decoration: underline;
 }
 
-.or{
+.dashboard button {
+  background-color: blue;
+  color: #fff;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.dashboard button:hover {
+  background-color: #fff;
+  border: 1px solid #000;
+  color: black;
+}
+
+.authenticate p {
+  color: blue;
+  text-decoration: underline;
+}
+
+.or {
   display: flex;
   justify-content: center;
   margin: 0 auto;
   align-items: center;
   gap: 10px;
-  
 }
 
-.continue-with{
+.continue-with {
   /* text-wrap: none; */
   white-space: nowrap;
 }
 
-.dash{
- /* border-top-width: 2px; */
+.dash {
+  /* border-top-width: 2px; */
   width: 8rem;
-  
+
   border: 1px solid grey;
- 
 }
 
 /*style for loader */
@@ -242,12 +216,11 @@ color: black;
   align-items: center;
 }
 
-.main-load{
- display: flex;
- justify-content: center;
- align-items: center;
- height: 90vh;
- 
+.main-load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 .loader .circle {
@@ -285,26 +258,29 @@ color: black;
     transform: scale(1) rotate(0);
   }
 
-  20%, 25% {
+  20%,
+  25% {
     transform: scale(1.3) rotate(90deg);
   }
 
-  45%, 50% {
+  45%,
+  50% {
     transform: scale(1) rotate(180deg);
   }
 
-  70%, 75% {
+  70%,
+  75% {
     transform: scale(1.3) rotate(270deg);
   }
 
-  95%, 100% {
+  95%,
+  100% {
     transform: scale(1) rotate(360deg);
   }
 }
 
-
- /*style for link shortner*/
- .shortner-div{
+/*style for link shortner*/
+.shortner-div {
   width: 400px;
   background-color: grey;
   display: flex;
@@ -314,9 +290,7 @@ color: black;
   padding: 10px;
 }
 
-
-
-.shortner-form input{
+.shortner-form input {
   border: 1px solid grey;
   outline: none;
   padding: 10px;
@@ -324,7 +298,7 @@ color: black;
 }
 
 /*google sign button*/
-.google-sign{
+.google-sign {
   display: flex;
   margin: 0 auto;
   gap: 5px;
@@ -335,7 +309,6 @@ color: black;
   border-radius: 10px;
 }
 
-.google-sign .google-image{
- 
-   margin-left: 130px;
+.google-sign .google-image {
+  margin-left: 130px;
 }

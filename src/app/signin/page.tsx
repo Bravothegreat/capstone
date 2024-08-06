@@ -14,6 +14,20 @@ import Image from "next/image";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const notify = () => {
+  toast.success ("  You have Login  successfully ", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined
+  });
+};
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -191,12 +205,25 @@ const Signin = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <button
+         onClick={notify}
           type="submit"
           disabled={loading}
           className={` ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           {loading ? "Signing In..." : "Sign In"}
         </button>
+
+        <ToastContainer 
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
 
         <div className="or">
           <div className="dash"></div>

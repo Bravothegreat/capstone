@@ -1,13 +1,28 @@
 "use client";
-import Link from "next/link";
+// import Link from "next/link";
+import Navbar from "./component/Navbar";
 
+
+ 
 
 export default function Home() {
+ 
+  
+  
+
   return (
+
     <>
-      <div>WELCOME TO SCISSORS</div>
+    
+      
+      <Navbar />
+     
+
+      {/* <div>WELCOME TO SCISSORS</div> */}
+      
       <div className="authenticate">
-        <p>
+
+        {/* <p>
           {" "}
           <Link href="/signup">Sign Up</Link>
         </p>
@@ -15,7 +30,7 @@ export default function Home() {
         <p>
           {" "}
           <Link href="/signin">Sign In</Link>
-        </p>
+        </p> */}
       </div>
     </>
   );

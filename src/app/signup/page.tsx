@@ -15,7 +15,22 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-const Signup = () => {
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
+// const notify = () => {
+//   toast.success ("  You have Signed in successfully ", {
+//     position: "top-center",
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined
+//   });
+// };
+
+const Signup = () =>  {
   const [profileName, setProfileName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -209,12 +224,25 @@ const Signup = () => {
         {message && <p style={{ color: "green" }}>{message}</p>}
 
         <button
+        //  onClick={notify}
           type="submit"
           disabled={loading}
           className={`${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
+
+        {/* <ToastContainer 
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          /> */}
 
         <div className="or">
           <div className="dash"></div>

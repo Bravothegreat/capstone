@@ -3,16 +3,31 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useState } from "react";
-import { FaChevronLeft } from "react-icons/fa6";
+// import { FaChevronLeft } from "react-icons/fa6";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const notify = () => {
+  toast.success ("   Thank you for submitting your email address to reset your password, Your email has been successfully verified and a password reset link has been sent to the email address associated with your account. ", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined
+  });
+};
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+   
 
   const handleResetPassword = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,7 +36,7 @@ const ResetPassword = () => {
 
     try {
       await sendPasswordResetEmail(auth, email);
-      router.push("/resetlink");
+      // router.push("/resetlink");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -74,11 +89,23 @@ const ResetPassword = () => {
 
            {error && <p style={{ color: "red" }}>{error}</p>}
           <button
-            type="submit"
+           onClick={notify}
+           
             className="w-full border-2 rounded-xl px-3 py-3 mt-6 text-center bg-deep-purple text-light-gray"
           >
             Reset Password
           </button>
+          <ToastContainer 
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
           </div>
         </form>
       </div>
