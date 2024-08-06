@@ -74,9 +74,10 @@ export default function Navbar() {
       {/* left side */}
       <section ref={animationParenth} className='flex items-center gap-10'>
         {/* logo */}
-        <h1 className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all '>
+        <div className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all  flex item-center justify-content gap-3'>
         <ImLink size={40} color='blue'/>
-        </h1>
+        <h1>SLASH IT</h1>
+        </div>
 
         { isSideMenuOpen &&   <MobileNav closeSideMenu={closeSideMenu}/> }
 
