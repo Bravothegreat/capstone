@@ -11,6 +11,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FiMenu } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { ImLink } from "react-icons/im";
+
 
 type NavItem = {
   label: string;
@@ -72,8 +74,8 @@ export default function Navbar() {
       {/* left side */}
       <section ref={animationParenth} className='flex items-center gap-10'>
         {/* logo */}
-        <h1 className='h-fit rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90'>
-          Sign up
+        <h1 className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all '>
+        <ImLink size={40} color='blue'/>
         </h1>
 
         { isSideMenuOpen &&   <MobileNav closeSideMenu={closeSideMenu}/> }
@@ -120,7 +122,9 @@ export default function Navbar() {
 
       <FiMenu 
        onClick={openSideMenu}
-      className='cursor-pointer text-4xl md:hidden' />
+      className='cursor-pointer text-4xl md:hidden'
+       size={50}
+      />
     </div>
   );
 }
@@ -132,7 +136,9 @@ function MobileNav({ closeSideMenu }: { closeSideMenu: () => void }) {
         <section className='flex justify-end'>
           <IoMdClose 
           onClick={closeSideMenu}
-          className="cursor-pointer text-4xl" />
+          className="cursor-pointer text-4xl" 
+          size={50}
+          />
         </section>
 
         <div className='flex flex-col test-base gap-2 transition-all'>
