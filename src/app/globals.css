@@ -45,13 +45,7 @@
   /* border: 1px solid grey; */
 }
 
-.forgot-password {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  font-size: 0.8rem;
-  color: blue;
-}
+
 
 .back-arrow {
   width: 2rem;
@@ -97,7 +91,7 @@
   top: -8px;
   border: black;
   transition: 0.15ms;
-  color: blue;
+  color: #3B82F6;
 }
 
 @keyframes error-shake {
@@ -148,7 +142,7 @@
 }
 
 .form button {
-  background-color: blue;
+  background-color: #3B82F6;
   color: #fff;
   padding: 0.7rem;
   border-radius: 10px;
@@ -161,12 +155,12 @@ form button:hover {
 }
 
 .link a {
-  color: blue;
-  text-decoration: underline;
+  color: #3B82F6;
+  /* text-decoration: underline; */
 }
 
 .dashboard button {
-  background-color: blue;
+  background-color: #3B82F6;
   color: #fff;
   margin-top: 1rem;
   padding: 0.5rem;
@@ -180,8 +174,8 @@ form button:hover {
 }
 
 .authenticate p {
-  color: blue;
-  text-decoration: underline;
+  color: #3B82F6;
+  /* text-decoration: underline; */
 }
 
 .or {
@@ -316,7 +310,7 @@ form button:hover {
 
 .small-font {
   font-size: 0.8rem; /* Adjust the size as needed */
-  color: green; /* Optional: Add color to match your design */
+  color: #10B981; /* Optional: Add color to match your design */
 }
 
 

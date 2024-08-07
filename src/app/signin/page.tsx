@@ -196,11 +196,12 @@ const Signin = () => {
           </label>
         </div>
 
-        <p className="forgot-password">
-          <Link className="forgotpass" href="/resetpassword">
-            Forgot password
+        <div className=" flex gap-2 justify-center text-sm">
+          <p>Forgot your password ?</p>
+          <Link href="/resetpassword"  className="text-blue-500">
+            Reset password
           </Link>
-        </p>
+        </div>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
 
