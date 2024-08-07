@@ -1,6 +1,6 @@
 
 
-"use client";
+ "use client";
 import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -15,22 +15,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// const notify = () => {
-//   toast.success ("  You have Signed in successfully ", {
-//     position: "top-center",
-//     autoClose: 5000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: true,
-//     draggable: true,
-//     progress: undefined
-//   });
-// };
-
-const Signup = () =>  {
+const Signup = () => {
   const [profileName, setProfileName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +23,12 @@ const Signup = () =>  {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+
+  // State for password validation
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
   const router = useRouter();
   let errorTimeout: NodeJS.Timeout;
 
@@ -45,12 +36,32 @@ const Signup = () =>  {
     if (error) {
       errorTimeout = setTimeout(() => {
         setError(null);
-      }, 4000); // Clear error message after 5 seconds
+      }, 4000); // Clear error message after 4 seconds
     }
 
     // Clean up the timeout if the component unmounts
     return () => clearTimeout(errorTimeout);
   }, [error]);
+
+  // Function to validate password
+  const validatePassword = (password: string) => {
+    const errors: string[] = [];
+    if (password.length < 8) {
+      errors.push("Must be 8 or more characters long");
+    }
+    if (!/[A-Z]/.test(password)) {
+      errors.push("One capital letter");
+    }
+    if (!/\d/.test(password)) {
+      errors.push("One number");
+    }
+    setPasswordErrors(errors);
+    setIsPasswordValid(errors.length === 0);
+  };
+
+  useEffect(() => {
+    validatePassword(password);
+  }, [password]);
 
   const handleSignin = async (event: FormEvent) => {
     event.preventDefault();
@@ -60,6 +71,12 @@ const Signup = () =>  {
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+
+    if (!isPasswordValid) {
+      setError("Password does not meet the requirements");
       setLoading(false);
       return;
     }
@@ -198,6 +215,8 @@ const Signup = () =>  {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => setIsPasswordFocused(false)}
             placeholder=""
             className="input-group_input"
           />
@@ -205,6 +224,14 @@ const Signup = () =>  {
             Password
           </label>
         </div>
+
+        {isPasswordFocused && passwordErrors.length > 0 && (
+          <ul className="password-requirements small-font">
+            {passwordErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        )}
 
         <div className="input-group">
           <input
@@ -224,25 +251,12 @@ const Signup = () =>  {
         {message && <p style={{ color: "green" }}>{message}</p>}
 
         <button
-        //  onClick={notify}
           type="submit"
           disabled={loading}
           className={`${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
-
-        {/* <ToastContainer 
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          /> */}
 
         <div className="or">
           <div className="dash"></div>
@@ -271,4 +285,3 @@ const Signup = () =>  {
 };
 
 export default Signup;
-

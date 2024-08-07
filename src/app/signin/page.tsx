@@ -18,7 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const notify = () => {
-  toast.success ("  You have Login  successfully ", {
+  toast.success ("  Will take few seconds to Login in. ", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,

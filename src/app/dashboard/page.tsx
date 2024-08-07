@@ -10,6 +10,7 @@ import { auth, firestore } from "../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import type { User } from "firebase/auth";
 import UrlShortener from "../component/urlshortener";
+import MarkdownEditor from "../component/Markdown";
 
 export default function Dashboard ()  {
   const [loading, setLoading] = useState(true);
@@ -68,6 +69,7 @@ export default function Dashboard ()  {
         Logout
       </button>
       <UrlShortener />
+      < MarkdownEditor/>
      </main>
     </div>
   );

@@ -18,20 +18,9 @@ export default function Home() {
       <Navbar />
      
 
-      {/* <div>WELCOME TO SCISSORS</div> */}
+      <div className="cssanimation leFadeInLeft sequence"> Example </div>
       
-      <div className="authenticate">
-
-        {/* <p>
-          {" "}
-          <Link href="/signup">Sign Up</Link>
-        </p>
-
-        <p>
-          {" "}
-          <Link href="/signin">Sign In</Link>
-        </p> */}
-      </div>
+     
     </>
   );
 }

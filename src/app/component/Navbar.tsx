@@ -70,13 +70,13 @@ export default function Navbar() {
  }
 
   return (
-    <div className='mx-auto flex w-full max-w-7xl justify-between px-4 text-sm mt-2'>
+    <div className='mx-auto flex w-full max-w-7xl justify-between px-4 text-sm mt-2 '>
       {/* left side */}
       <section ref={animationParenth} className='flex items-center gap-10'>
         {/* logo */}
         <div className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all  flex item-center justify-content gap-3'>
-        <ImLink size={40} color='blue'/>
-        <h1>SLASH IT</h1>
+        <ImLink size={40} color="blue" className='text-purple-800'/>
+        <h1 className='text-align:center mt-1 text-2xl text-black italic text-blue-600'>SLASH IT</h1>
         </div>
 
         { isSideMenuOpen &&   <MobileNav closeSideMenu={closeSideMenu}/> }
@@ -85,7 +85,7 @@ export default function Navbar() {
         <div className='hidden md:flex items-center gap-4 transition-all'>
           {navItems.map((d, i) => (
             <div key={i} className='relative group px-2 py-3 transition-all'>
-              <p className='flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black'>
+              <p className='flex cursor-pointer items-center gap-2 text-black-400 group-hover:text-neutral font-bold'>
                 <span>{d.label}</span>
                 {d.children && (
                   <IoIosArrowDown className='rotate-180 transition-all group-hover:rotate-0' />
@@ -109,13 +109,13 @@ export default function Navbar() {
       {/* right side */}
       <section className='hidden md:flex items-center gap-8'>
         <Link href="/signin">
-          <button className='h-fit text-neutral-400 transition-all hover:text-black/90'>
+          <button className='h-fit text-neutral-400  transition-all hover:text-black/90 font-black text-base'>
             Login
           </button>
         </Link>
 
         <Link href="/signup">
-          <button className='h-fit rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90 whitespace-nowrap'>
+          <button className='h-fit rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90 whitespace-nowrap font-extrabold text-base'>
             Sign Up
           </button>
         </Link>
@@ -124,7 +124,7 @@ export default function Navbar() {
       <FiMenu 
        onClick={openSideMenu}
       className='cursor-pointer text-4xl md:hidden'
-       size={50}
+       size={45}
       />
     </div>
   );
@@ -138,11 +138,11 @@ function MobileNav({ closeSideMenu }: { closeSideMenu: () => void }) {
           <IoMdClose 
           onClick={closeSideMenu}
           className="cursor-pointer text-4xl" 
-          size={50}
+          size={45}
           />
         </section>
 
-        <div className='flex flex-col test-base gap-2 transition-all'>
+        <div className='flex flex-col text-base gap-2 transition-all font-bold'>
           {navItems.map((d, i) => (
            <SingleNavItem 
            key={i}
@@ -156,13 +156,13 @@ function MobileNav({ closeSideMenu }: { closeSideMenu: () => void }) {
 
         <section className='flex-col mt-4 flex items-center gap-8'>
         <Link href="/signin">
-          <button className='h-fit text-neutral-400 transition-all hover:text-black/90'>
+          <button className='h-fit text-neutral-400 transition-all hover:text-black/90  text-base font-black'>
             Login
           </button>
         </Link>
 
         <Link href="/signup">
-          <button className='w-full max-w-[200px] rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90 whitespace-nowrap'>
+          <button className='w-full max-w-[200px] rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90 whitespace-nowrap text-base font-black'>
             Sign Up
           </button>
         </Link>
@@ -187,7 +187,7 @@ function SingleNavItem(d: NavItem) {
     ref={animationParenth}
       onClick={toggleItem}
      className='relative  px-2 py-3 transition-all'>
-      <p className='flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black'>
+      <p className='flex cursor-pointer items-center gap-2 text-black-400 group-hover:text-black text-sm'>
         <span>{d.label}</span>
         {d.children && (
           <IoIosArrowDown className={`text-xs transition-all ${isItemOpen && "rotate-180"}`} />
