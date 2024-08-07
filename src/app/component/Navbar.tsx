@@ -124,7 +124,7 @@ export default function Navbar() {
       <FiMenu 
        onClick={openSideMenu}
       className='cursor-pointer text-4xl md:hidden'
-       size={45}
+       size={40}
       />
     </div>
   );
@@ -138,7 +138,7 @@ function MobileNav({ closeSideMenu }: { closeSideMenu: () => void }) {
           <IoMdClose 
           onClick={closeSideMenu}
           className="cursor-pointer text-4xl" 
-          size={45}
+          size={40}
           />
         </section>
 
