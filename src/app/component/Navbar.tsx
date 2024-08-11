@@ -75,7 +75,7 @@ export default function Navbar() {
       <section ref={animationParenth} className='flex items-center gap-10'>
         {/* logo */}
         <div className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all  flex item-center justify-content gap-3'>
-        <ImLink size={40} color="#3B82F6" className='text-purple-800'/>
+        <ImLink size={40} color="#3B82F6" className=''/>
         <h1 className='text-align:center mt-1 text-2xl font-black  text-blue-500'>SLASH IT</h1>
         </div>
 

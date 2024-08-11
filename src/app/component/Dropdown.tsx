@@ -32,6 +32,7 @@ const Dropdown: React.FC<DropdownProps> = ({ icons, label, socials }) => {
 
   const handleItemClick = (url: string) => {
     window.open(url, '_blank');
+    
     setIsOpen(false);
   };
 

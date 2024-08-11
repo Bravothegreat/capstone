@@ -1,18 +1,17 @@
 
 
 
+"use client"; 
 
-"use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import type { User } from "firebase/auth";
-import UrlShortener from "../component/urlshortener";
-import MarkdownEditor from "../component/Markdown";
+import DashboardLayout from "../component/DashboardLayout";
 
-export default function Dashboard ()  {
+export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -35,44 +34,27 @@ export default function Dashboard ()  {
     return () => unsubscribe();
   }, [router]);
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      router.push("/signin");
-    } catch (error) {
-      return error
-      console.error("logout error:", error);
-    }
-  };
+
 
   if (loading) {
-    return <div className="main-load">
-         <div className="loader">
-       <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
+    return (
+      <div className="main-load">
+        <div className="loader">
+          <div className="circle"></div>
+          <div className="circle"></div>
+          <div className="circle"></div>
+          <div className="circle"></div>
         </div>
-        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <h1>Dashboard</h1>
-     <main className="dashboard">
-     {userName && <p>Welcome, {userName}!</p>}
-      
-      <button
-        className=""
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
-      <UrlShortener />
-      < MarkdownEditor/>
-     </main>
-    </div>
+    <DashboardLayout>
+      <div className="">
+        <h1>Welcome, {userName}</h1>
+        
+      </div>
+    </DashboardLayout>
   );
-};
-
-
+}

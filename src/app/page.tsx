@@ -19,7 +19,7 @@ export default function Home() {
      
 
       <div className="cssanimation leFadeInLeft sequence"> Example </div>
-      
+  
      
     </>
   );

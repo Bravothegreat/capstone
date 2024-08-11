@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { FaDownload } from "react-icons/fa";
+
 import QRCode from "qrcode.react";
 import { toPng, toJpeg, toSvg, toCanvas } from "html-to-image"; // Import the html-to-image library
 import { shortenUrl } from "../api/shorten";
