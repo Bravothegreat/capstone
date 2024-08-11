@@ -81,7 +81,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           <ul className="space-y-6 mt-10">
             <li>
               <Link href="/dashboard" className="flex items-center space-x-2 hover:text-gray-300">
-                <RxDashboard size={40} />
+                <RxDashboard size={20} />
                 {isSidebarOpen && <span>Dashboard</span>}
               </Link>
             </li>
