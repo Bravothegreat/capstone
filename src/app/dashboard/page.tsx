@@ -5,11 +5,12 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth, firestore } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import type { User } from "firebase/auth";
 import DashboardLayout from "../component/DashboardLayout";
+import UrlShortener from "../component/urlshortener";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -52,9 +53,9 @@ export default function Dashboard() {
   return (
     <DashboardLayout>
       <div className="">
-        <h1>Welcome, {userName}</h1>
-        
-      </div>
+        <h1 className="username">Welcome, {userName}</h1>
+        </div>
+        <UrlShortener />
     </DashboardLayout>
   );
 }

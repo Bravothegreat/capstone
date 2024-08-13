@@ -240,8 +240,9 @@ const Signup = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder=""
-            className="input-group_input"
-          />
+            className="input-group_input" />
+
+
           <label htmlFor="confirmPassword" className="input-group_label">
             Confirm Password
           </label>

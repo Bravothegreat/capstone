@@ -41,7 +41,7 @@ const Dropdown: React.FC<DropdownProps> = ({ icons, label, socials }) => {
       <button
         type='button'
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-soft-orange text-white font-semibold py-2 px-4 rounded inline-flex items-center"
+        className="dropdown-button"
       >
         <span className='flex items-center gap-2'>{icons}<p className='hidden md:block'> {label}</p></span>
       </button>
@@ -50,7 +50,7 @@ const Dropdown: React.FC<DropdownProps> = ({ icons, label, socials }) => {
           {socials.map((item, index) => (
             <li
               key={index}
-              className="block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer"
+              className="block px-4 py-2 text-gray-800 hover:bg-grey-100 cursor-pointer"
               onClick={() => handleItemClick(item.url)}
             >
               <div className="flex items-center">

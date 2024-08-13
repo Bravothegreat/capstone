@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const notify = () => {
-  toast.success ("   Thank you for submitting your email address to reset your password, Your email has been successfully verified and a password reset link has been sent to the email address associated with your account. ", {
+  toast.success ("   Thank you for submitting your email address to reset your password, a password reset link has been sent to the email address associated with your account. ", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,

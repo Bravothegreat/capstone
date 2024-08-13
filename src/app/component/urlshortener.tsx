@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import QRCode from "qrcode.react";
-import { toPng, toJpeg, toSvg, toCanvas } from "html-to-image"; // Import the html-to-image library
+import { toPng, toJpeg, toSvg, toCanvas } from "html-to-image"; 
 import { shortenUrl } from "../api/shorten";
 import { FiLink, FiLink2 } from "react-icons/fi";
 import {
@@ -34,7 +34,7 @@ const UrlShortener = () => {
   const [error, setError] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState("");
   const [isShortened, setIsShortened] = useState(false);
-  const [showQRCode, setShowQRCode] = useState(false); // State to manage QR code visibility
+  const [showQRCode, setShowQRCode] = useState(false); 
   const [downloadFormat, setDownloadFormat] = useState("png"); // State to manage download format
   const qrCodeRef = useRef<HTMLDivElement>(null); // Ref for the QR code div
 
@@ -218,10 +218,10 @@ const UrlShortener = () => {
 
   return (
     <div className="shortner-div">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-1">
         <label
           htmlFor="longUrl"
-          className="flex items-center gap-2 text-xl font-nuno font-normal"
+          className="flex items-center gap-2 text-xl  font-normal"
         >
           {isShortened ? (
             <FiLink2 className="text-2xl" />
@@ -284,23 +284,26 @@ const UrlShortener = () => {
 
         {isShortened && (
           <div className="flex gap-2 mt-4">
+            
             <button
+             
               type="button"
               onClick={handleVisit}
-              className="bg-transparent text-soft-orange border-soft-orange border font-semibold py-2 px-4 rounded"
+              className="dropdown-button"
             >
               <FaShare />
             </button>
             <button
               type="button"
               onClick={() => setShowQRCode(!showQRCode)} // Toggle QR code visibility
-              className="bg-soft-orange text-white font-semibold py-2 px-4 rounded inline-flex items-center gap-2"
+              className="dropdown-button"
             >
               <PiQrCodeFill />
               <p className="hidden md:block">QR</p>
             </button>
 
             <Dropdown
+          
               icons={<TfiSharethis />}
               label="Share"
               socials={socialItems.map((item) => ({
@@ -312,7 +315,7 @@ const UrlShortener = () => {
             <button
               type="button"
               onClick={handleCopy}
-              className="bg-deep-teal text-white font-semibold py-2 px-4 rounded flex items-center gap-2"
+              className="dropdown-button"
             >
               <IoIosCopy />
               <p className="hidden md:block">Copy</p>
@@ -326,6 +329,8 @@ const UrlShortener = () => {
                   <FaTimes />
                 </button>
 
+              
+
                 <p className="flex items-center gap-1 text-xs">
                   <IoMdCheckmarkCircle /> success
                 </p>
@@ -337,10 +342,11 @@ const UrlShortener = () => {
 
         <button
           type="submit"
-          className="w-full text-xl font-bold font-ubuntu rounded-xl px-3 py-2 mt-6 text-center bg-deep-teal text-light-gray transition-all duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-md active:bg-opacity-100 active:scale-95"
+           className="shorten-button"
         >
           {isShortened ? "Trim Another" : "Trim URL"}
         </button>
+
       </form>
 
       {isShortened &&
@@ -367,14 +373,14 @@ const UrlShortener = () => {
                 </select>
                 <button
                   onClick={handleDownloadQRCode}
-                  className="bg-deep-teal text-white font-semibold py-2 px-4 rounded"
+                  className="download-button"
                 >
                   Download QR Code
                 </button>
               </div>
               <button
                 onClick={handleShareQRCodeAsSVG}
-                className="bg-deep-teal text-white font-semibold py-2 px-4 rounded"
+                className="share-button"
               >
                 Share QR Code
               </button>
