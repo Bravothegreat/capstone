@@ -110,14 +110,14 @@ const DashboardProfile: React.FC = () => {
 
   return (
     <DashboardLayout>
-      <div className="bg-[rgba(50,132,255,0.14)] rounded-md ">
-      <h1 className=" flex justify-center pt-4">Profile</h1>
-      <div className="flex justify-center">
-        
+      <div className=" rounded-md ">
+      <h1 className=" flex justify-center mt-12 font-extrabold text-2xl ">Profile</h1>
+      <div className="flex justify-center ">
+     
        {isEditing ? (
-        <div className="flex flex-col w-64 gap-4">
+        <div className="flex flex-col w-64 gap-4 ">
 
-          <div className="flex justify-center flex-col gap-4 ">
+          <div className="flex justify-center flex-col gap-4  ">
 
           <label className="">
             Name:
