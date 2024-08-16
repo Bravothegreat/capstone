@@ -65,12 +65,13 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     <div className="flex">
        
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-12 md:w-28 sm:w-[5px]  text-black-500 md:p-4 sm:p-1 border-r border-gray-400 flex flex-col justify-between font-bold">
-        <nav className='mt-12'>
-          <ul className="space-y-6 mt-10">
+      <aside className="fixed left-0 top-0 h-full w-12 md:w-28 sm:w-[5px]  text-black-500 md:p-4 sm:p-1 border-r border-gray-400 flex flex-col justify-between font-bold bg-white shadow-lg">
+
+        <nav className='mt-12 bg-white'>
+          <ul className="space-y-6 mt-10 bg-white">
             {/* <p>slash</p> */}
-            <li>
-              <Link href="/dashboard" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300">
+            <li className='bg-white'>
+              <Link href="/dashboard" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300 bg-white">
                 <RxDashboard size={20} />
                 <span className="hidden md:inline">Dashboard</span>
               </Link>
@@ -78,19 +79,19 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             {isAuthenticated && (
               <>
                 <li>
-                  <Link href="/dashboard/settings" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300">
+                  <Link href="/dashboard/settings" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300 bg-white">
                     <IoSettingsOutline size={20} />
                     <span className="hidden md:inline">Settings</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/analytics" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300">
-                    <IoAnalyticsSharp size={20} />
-                    <span className="hidden md:inline">Analytics</span>
+                  <Link href="/dashboard/analytics" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300 bg-white">
+                    <IoAnalyticsSharp size={20} className='bg-white'/>
+                    <span className="  hidden md:inline ">Analytics</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/profile" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300">
+                  <Link href="/dashboard/profile" className="flex items-center justify-center md:justify-start space-x-2 hover:text-gray-300 bg-white">
                     <ImProfile size={20} />
                     <span className="hidden md:inline">Profile</span>
                   </Link>
@@ -101,12 +102,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         </nav>
 
         {/* Logout Button */}
-        <div className="flex flex-col justify-end p-4">
+        <div className="flex flex-col justify-end p-4 bg-white">
           <button
             onClick={handleLogout}
-            className="flex items-center justify-center space-x-2 hover:text-gray-300 focus:outline-none font-bold"
+            className="flex items-center justify-center space-x-2 hover:text-gray-300 focus:outline-none font-bold bg-white"
           >
-            <FiLogOut size={20} />
+            <FiLogOut size={30} className='bg-white' />
             <span className="hidden md:inline">Logout</span>
           </button>
         </div>

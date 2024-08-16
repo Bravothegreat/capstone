@@ -41,10 +41,10 @@ const navItems: NavItem[] = [
     label: 'Pricing',
     link: "#",
     children: [
-      {
-        label: 'List',
-        link: '/#pricelist',
-      },
+      // {
+      //   label: 'List',
+      //   link: '/#pricelist',
+      // },
     ],
   },
   {
@@ -70,13 +70,17 @@ export default function Navbar() {
  }
 
   return (
-    <div className='mx-auto flex w-full max-w-7xl justify-between px-4 text-sm mt-2 '>
+    // <div className='  flex w-full max-w-7xl justify-between px-4 text-sm mt-2 fixed top-0 left-0  shadow-md z-50  '>
+
+    <div className="fixed top-0 left-0 w-full max-w-7xl mx-auto px-4 text-sm mt- mb-4 sm:mb-20 md:mb-20 shadow-md z-50 flex justify-between mt-0 p-5 ">
       {/* left side */}
       <section ref={animationParenth} className='flex items-center gap-10'>
+
         {/* logo */}
-        <div className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all  flex item-center justify-content gap-3'>
-        <ImLink size={40} color="#3B82F6" className=''/>
-        <h1 className='text-align:center mt-1 text-2xl font-black  text-blue-500'>SLASH IT</h1>
+
+        <div className='h-fit rounded-xl  border-neutral-400 px-4 py-2 text-neutral-400 transition-all  flex item-center justify-content gap-2'>
+        <ImLink size={34} color="#0b59de" className=''/>
+        <h1 className='text-align:center mt-1 text-2xl font-black  text-customColor'>SLASH IT</h1>
         </div>
 
         { isSideMenuOpen &&   <MobileNav closeSideMenu={closeSideMenu}/> }
@@ -93,7 +97,7 @@ export default function Navbar() {
               </p>
 
               {d.children && (
-                <div className='absolute right-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex'>
+                <div className='absolute right-0 top-10 hidden w-auto flex-col gap-1 rounded-lg  py-3 shadow-md transition-all group-hover:flex'>
                   {d.children.map((ch, j) => (
                     <Link key={j} href={ch.link ?? "#"} className='flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black'>
                       <span className='whitespace-nowrap pl-3'>{ch.label}</span>
@@ -109,13 +113,14 @@ export default function Navbar() {
       {/* right side */}
       <section className='hidden md:flex items-center gap-8'>
         <Link href="/signin">
-          <button className='h-fit text-neutral-400  transition-all hover:text-black/90 font-black text-base'>
+          <button className='h-fit text-button  transition-all hover:text-gray-400 font-black text-base'>
             Login
           </button>
         </Link>
 
         <Link href="/signup">
-          <button className='h-fit rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90 whitespace-nowrap font-extrabold text-base'>
+          <button className='h-fit rounded-xl border-2 border-button px-4 py-2 text-button  transition-all hover:border-gray-400
+          hover:text-gray-400 whitespace-nowrap font-extrabold text-base'>
             Sign Up
           </button>
         </Link>
@@ -133,7 +138,8 @@ export default function Navbar() {
 function MobileNav({ closeSideMenu }: { closeSideMenu: () => void }) {
   return (
     <div className='fixed left-0 top-0 flex h-full min-h-screen w-full justify-end bg-black/60 md:hidden'>
-      <div className='h-full w-[65%] bg-white px-4 py-4'>
+     
+      <div className='h-full w-[65%]  px-4 py-4 '>
         <section className='flex justify-end'>
           <IoMdClose 
           onClick={closeSideMenu}
@@ -156,13 +162,13 @@ function MobileNav({ closeSideMenu }: { closeSideMenu: () => void }) {
 
         <section className='flex-col mt-4 flex items-center gap-8'>
         <Link href="/signin">
-          <button className='h-fit text-neutral-400 transition-all hover:text-black/90  text-base font-black'>
+          <button className='h-fit text-button transition-all hover:text-gray-400  text-base font-black'>
             Login
           </button>
         </Link>
 
         <Link href="/signup">
-          <button className='w-full max-w-[200px] rounded-xl border-2 border-neutral-400 px-4 py-2 text-neutral-400 transition-all hover:border-black hover:text-black/90 whitespace-nowrap text-base font-black'>
+          <button className='w-full max-w-[200px] rounded-xl border-2 border-button px-4 py-2 text-button transition-all hover:border-gray-400 hover:text-gray-400 whitespace-nowrap text-base font-black'>
             Sign Up
           </button>
         </Link>
@@ -195,7 +201,8 @@ function SingleNavItem(d: NavItem) {
       </p>
 
       { isItemOpen && d.children && (
-        <div className='  w-auto flex-col gap-1 rounded-lg bg-white py-3  transition-all flex'>
+       // bg-white
+        <div className='  w-auto flex-col gap-1 rounded-lg  py-3  transition-all flex'>
           {d.children.map((ch, j) => (
             <Link key={j} href={ch.link ?? "#"} className='flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black'>
               <span className='whitespace-nowrap pl-3'>{ch.label}</span>
