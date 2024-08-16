@@ -16,7 +16,7 @@ import { CiLocationOn } from "react-icons/ci";
 const Footer: React.FC = () => {
   return (
         
-    <footer className="bg-customDarkBlue text-white py-8 mr-4 p-4">
+    <footer className="bg-customDarkBlue text-white py-8 mr-4 p-4 rounded-lg">
 
       <div className=" bg-customDarkBlue ">
 
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
             Contact us
             </h1>
 
-         <p className=" bg-customDarkBlue flex gap-2 items-center">
+         <p className=" bg-customDarkBlue flex gap-2 items-center mb-4">
          <IoIosCall size={30} className=" bg-customDarkBlue"/>: <span className=" bg-customDarkBlue">081358969090</span>
          </p>
 
@@ -39,26 +39,28 @@ const Footer: React.FC = () => {
          
         </div>
 
-     
-        <div className=" bg-customDarkBlue mt-4 mb-4">
+       
+        <div className=" bg-customDarkBlue mt-4 mb-4 ">
         <h1 className="bg-customDarkBlue text-lg font-extralight mb-4 text-customColor ">Quick Links</h1>
+          <div className="bg-customDarkBlue flex gap-4 flex-col">
           <p className="bg-customDarkBlue" >
-          <Link href="/analytics" className=" bg-customDarkBlue text-sm hover:text-teal-400">
+          <Link href="/#analytics" className=" bg-customDarkBlue text-sm hover:text-teal-400">
             Analytics
           </Link>
           </p>
 
         <p className="bg-customDarkBlue" >
-        <Link href="/about" className=" bg-customDarkBlue text-sm hover:text-teal-400">
+        <Link href="/#about" className=" bg-customDarkBlue text-sm hover:text-teal-400">
             About Us
           </Link>
         </p>
 
          <p className="bg-customDarkBlue" >
-         <Link href="/faq" className=" bg-customDarkBlue text-sm hover:text-teal-400">
+         <Link href="/#faq" className=" bg-customDarkBlue text-sm hover:text-teal-400">
             FAQs
           </Link>
          </p>
+          </div>
         </div>
 
         
@@ -88,7 +90,7 @@ const Footer: React.FC = () => {
         </span>
          </div>
 
-        <p className=" bg-customDarkBlue text-sm text-gray-400">© 2024 MyCompany. All rights reserved.</p>
+        <p className=" bg-customDarkBlue text-sm mt-4 text-gray-400">© 2024 MyCompany. All rights reserved.</p>
       </div>
     </footer>
   );

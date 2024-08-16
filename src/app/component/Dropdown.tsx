@@ -41,7 +41,7 @@ const Dropdown: React.FC<DropdownProps> = ({ icons, label, socials }) => {
       <button
         type='button'
         onClick={() => setIsOpen(!isOpen)}
-         className="text-black border-2 border-blue-600 bg-white flex p-2.5 rounded-sm justify-center items-center"
+         className="text-black border-2   flex p-2.5 rounded-sm justify-center items-center"
       >
         <span className='flex items-center gap-2'>{icons}<p className='hidden md:block'> {label}</p></span>
       </button>

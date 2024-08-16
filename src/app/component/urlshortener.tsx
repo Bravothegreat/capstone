@@ -295,13 +295,13 @@ const UrlShortener: React.FC<UrlShortenerProps> = ({ onUrlShortened }) => {
       </div>
   
       {isShortened && (
-        <div className="flex gap-2 mt-4 flex-wrap">
+        <div className="flex justify-between p-2 mt-4 flex-wrap">
           <button
             type="button"
             onClick={handleVisit}
             className="dropdown-button"
           >
-            <FaShare />
+            <FaShare size={50}/>
           </button>
           <button
             type="button"
