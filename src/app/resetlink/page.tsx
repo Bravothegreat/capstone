@@ -1,11 +1,7 @@
 
 "use client";
 import Link from "next/link";
-// import { FaChevronLeft } from "react-icons/fa6";
-// import Image from "next/image";
-// import Message from "@/public/message.svg";
-// import scanMe from "@/public/scan-me.jpeg";
-// import { IoIosArrowRoundBack } from "react-icons/io";
+
 
 const ResetLinkPage = () => {
   return (

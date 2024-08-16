@@ -41,10 +41,10 @@ const navItems: NavItem[] = [
     label: 'Pricing',
     link: "#",
     children: [
-      // {
-      //   label: 'List',
-      //   link: '/#pricelist',
-      // },
+      {
+        label: 'List',
+        link: '/#pricelist',
+      },
     ],
   },
   {

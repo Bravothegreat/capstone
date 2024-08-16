@@ -3,7 +3,7 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useState } from "react";
-// import { FaChevronLeft } from "react-icons/fa6";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
@@ -53,7 +53,7 @@ const ResetPassword = () => {
          className="h-10 w-10 text-dark-gray absolute top-5 -left-5"
         >
            
-          {/* <FaChevronLeft className="h-10 w-10 text-dark-gray absolute top-5 -left-5" /> */}
+       
         </Link>
         <h1 className="font-medium text-4xl text-deep-purple">Reset Password</h1>
         <span>
@@ -64,7 +64,7 @@ const ResetPassword = () => {
           </p>
         </span>
 
-        <form onSubmit={handleResetPassword} >
+        <form onSubmit={handleResetPassword} className="form">
 
           <div className="input-group">
              

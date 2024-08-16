@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
         </p>
 
          <p className="bg-customDarkBlue" >
-         <Link href="/#faq" className=" bg-customDarkBlue text-sm hover:text-teal-400">
+         <Link href="/#faqs" className=" bg-customDarkBlue text-sm hover:text-teal-400">
             FAQs
           </Link>
          </p>

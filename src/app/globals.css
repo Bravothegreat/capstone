@@ -290,74 +290,12 @@ form button:hover {
   }
 }
 
-/*style for link shortner*/
-/* 
-.shortner-div {
-  width: 310px;
-  background-color: rgba(50, 132, 255, 0.14);
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  margin-top: 20px;
-  padding: 10px;
-  
-}
-
- .shorten-button{
-   border: 2px solid rgb(14, 103, 236, 0.945);
-   background-color: #fff;
-   padding: 10px;
-   border-radius: 5px;
-
- }
 
  .shorten-button:hover{
   color: rgb(14, 103, 236, 0.945);
 
    }
 
-   /* .username{
-    background-color: red;
-    z-index: 100;
-    position: fixed;
-   } */
-/* 
-  .download-button, .share-button{
-  border: 2px solid rgb(14, 103, 236, 0.945);
-  color: #000;
-  padding: 10px;
-  border-radius: 5px;
-  white-space: nowrap;
- }
-
-  .dropdown-button{
-    color: #000;
-    border: 2px solid rgba(14, 103, 236, 0.945);
-    background-color: white;
-    display: flex;
-     padding: 10px;
-     border-radius: 5px;
-    justify-content: center;
-    align-items: center;
-  }
-
-   .dropdown-button, .shorten-button:hover{
-     border: 2px solid blue;
-   }
-
-  .shortner-div input:focus{
-  border: 2px solid rgb(84, 84, 226);
- }
-
- .shorten-button:focus{
-  border: 2px solid rgba(14, 103, 236, 0.945);
- }
-
-.shortner-form input {
-  border: 1px solid grey;
-  outline: none;
-  padding: 10px;
-  /* width: 300px;} */
 
 /*google sign button*/
 .google-sign {
@@ -377,20 +315,10 @@ form button:hover {
 
 
 .small-font {
-  font-size: 0.8rem; /* Adjust the size as needed */
-  color: #10B981; /* Optional: Add color to match your design */
+  font-size: 0.8rem; 
+  color: #10B981;
 }
 
-
-
-/* .leFadeInLeft span { animation-name: leFadeInLeft }
-@keyframes leFadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-60px);
-    }
-    to { opacity: 1 }
-} */
 
 
  /*LANDING PAGE*/
