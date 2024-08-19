@@ -8,6 +8,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BsPeople } from "react-icons/bs";
 import { TiContacts } from "react-icons/ti";
 import { FiMail } from "react-icons/fi";
+import { FaMarkdown } from "react-icons/fa";
 import Link from "next/link";
 
 const sidebarItems = [
@@ -17,9 +18,9 @@ const sidebarItems = [
     icon: AiOutlineHome,
   },
   {
-    name: "Settings",
+    name: "Markdown",
     href: "/settings",
-    icon: BsPeople,
+    icon:FaMarkdown,
   },
   {
     name: "Analytics",

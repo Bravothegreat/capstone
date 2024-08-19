@@ -37,7 +37,7 @@ const Dropdown: React.FC<DropdownProps> = ({ icons, label, socials }) => {
   };
 
   return (
-    <div className="" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef}>
       <button
         type='button'
         onClick={() => setIsOpen(!isOpen)}
