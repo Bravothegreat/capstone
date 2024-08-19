@@ -294,7 +294,7 @@ const UrlShortener: React.FC<UrlShortenerProps> = ({ onUrlShortened }) => {
               onClick={handleVisit}
               className="dropdown-button"
             >
-              <FaShare size={50} />
+              <FaShare size={20} />
             </button>
             <button
               type="button"
@@ -319,7 +319,7 @@ const UrlShortener: React.FC<UrlShortenerProps> = ({ onUrlShortened }) => {
               onClick={handleCopy}
               className="dropdown-button"
             >
-              <IoIosCopy />
+              <IoIosCopy size={20} className="bg-white" />
               <p className="hidden md:block">Copy</p>
             </button>
             {copySuccess && (
@@ -330,10 +330,10 @@ const UrlShortener: React.FC<UrlShortenerProps> = ({ onUrlShortened }) => {
                 >
                   <FaTimes />
                 </button>
-                <p className="flex items-center gap-1 text-xs">
+                <p className="flex items-center gap-1 text-xs ">
                   <IoMdCheckmarkCircle /> success
                 </p>
-                <p className="text-xs">{copySuccess}</p>
+                <p className="text-xs ">{copySuccess}</p>
               </div>
             )}
           </div>
@@ -350,7 +350,7 @@ const UrlShortener: React.FC<UrlShortenerProps> = ({ onUrlShortened }) => {
       {isShortened && shortUrl && showQRCode && (
         <div className="mt-4 flex flex-col items-center bg-white">
           <div ref={qrCodeRef} className="p-2 bg-white rounded-xl">
-            <QRCode value={shortUrl} size={120} />
+            <QRCode value={shortUrl} size={150} />
           </div>
 
           <p className="mt-2 text-xs text-gray-600 bg-white">

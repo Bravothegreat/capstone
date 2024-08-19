@@ -1,7 +1,7 @@
 
 "use client"
 
-import FAQBlock from '../component/FaqsBlock'; 
+import FAQBlock from './FaqBlock'; 
 
 interface FAQProps {
   question: string;
