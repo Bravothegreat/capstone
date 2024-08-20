@@ -137,7 +137,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             onClick={handleLogout}
             className="flex  items-center space-x-4 hover:text-gray-300 focus:outline-none font-bold bg-white"
           >
-            <FiLogOut size={40} className='bg-white' />
+            <FiLogOut size={30} className='bg-white' />
             <span className="hidden md:inline bg-white">Logout</span>
           </button>
         </div>

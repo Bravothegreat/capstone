@@ -1,8 +1,3 @@
-
-
-
-
-
 "use client";
 import React, { useState, ChangeEvent } from "react";
 import ReactMarkdown from "react-markdown";
@@ -12,15 +7,8 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import DashboardLayout from '../../component/DashboardLayout';
 
-interface MarkdownProps {
-  content: string;
-  onSave: () => void;
-}
 
-
-// export default function MarkdownEditor() 
-
-const Markdown: React.FC<MarkdownProps> = ({ content, onSave }) =>  {
+const DashboardMarkdown: React.FC = () => {
   const [markdown, setMarkdown] = useState("");
   const [images, setImages] = useState<{ name: string; url: string }[]>([]);
 
@@ -66,7 +54,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, onSave }) =>  {
   
 
   return (
-    <DashboardLayout>
+    < DashboardLayout>   
     <div className="markdown-editor">
       <h1 className="font-serif text-base md:text-lg flex justify-center text-gray-700 py-3">
         Markdown Support
@@ -225,8 +213,8 @@ const Markdown: React.FC<MarkdownProps> = ({ content, onSave }) =>  {
         }
       `}</style>
     </div>
-    </DashboardLayout>
+    </ DashboardLayout>
   );
 }
 
-export default Markdown;
+export default DashboardMarkdown;
