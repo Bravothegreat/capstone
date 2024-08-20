@@ -76,14 +76,14 @@ const config: Config = {
         slideInRight: 'slideInRight 3s ease-out',
         slideOutRight: 'slideOutRight 3s ease-in',
         
-        slideInFromTop: 'slideInFromTop 15s ease-out',
+        slideInFromTop: 'slideInFromTop 10s ease-out',
        
-        slideInFromLeft: 'slideInFromLeft 5s ease-out',
+        slideInFromLeft: 'slideInFromLeft 3s ease-out',
         shakee: 'shake 0.5s ease-in-out',
 
          
         slideInFromBottom: 'slideInFromBottom 1s ease-out',
-        shaky: 'shake 5s ease-in-out',
+        shaky: 'shake 3s ease-in-out',
 
         // slideInFromRight: 'slideInFromRight 1s ease-out',
         // shaky: 'shake 0.5s ease-in-out',
